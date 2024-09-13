@@ -36,8 +36,8 @@ const data = [
   {
     title: "Free Consultation & Quote",
     links: [
-      { label: "Book Your Free Consultation", link: "pages/consultation-quote/consultation" },
-      { label: "Get Your Free Quote",  link: "pages/consultation-quote/quote" },
+      { label: "Book Your Free Consultation", link: "/pages/consultation-quote/consultation" },
+      { label: "Get Your Free Quote",  link: "/pages/consultation-quote/quote" },
 
     ],
   },
