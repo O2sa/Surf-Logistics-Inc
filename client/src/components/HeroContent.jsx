@@ -45,7 +45,7 @@ function HeroContent() {
         style={{ left: "50%", top: "40%", transform: "translateX(-50%)" }}
       >
         <Title mb={"md"} c="quote">
-          {t("Where Freight Meets Finesse")}
+          {t("Where Freight  Finesse")}
         </Title>
         <Box ta={"center"} px={'xl'} style={{display:'flex',justifyContent:'center',}} >
           <Text c={"white"} maw={'900px'} >

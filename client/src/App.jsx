@@ -1,4 +1,4 @@
-import { MantineProvider } from "@mantine/core";
+import { Loader, MantineProvider } from "@mantine/core";
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -99,7 +99,20 @@ function App() {
     >
       <AnimatePresence mode="wait">
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <Loader
+              size={'xl'}
+                style={{
+                  left: "50%",
+                  top: "40%",
+                  position:'absolute',
+                  transform: "translateX(-50%)",
+                }}
+                variant="bars"
+              />
+            }
+          >
             <Routes>
               <Route path="/" element={<Hero />} />
               <Route path="/pages" element={<Pages />}>
