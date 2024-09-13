@@ -3,34 +3,80 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mantine/core";
+import { useMediaQuery, useViewportSize } from "@mantine/hooks";
+import LiveChat from "../components/LiveChat";
+import { mainSectionHeight } from "../utils/constants";
 
 const Pages = () => {
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const { height } = useViewportSize();
   return (
-    <Container m={"0"} p={"0"} w={"100%"} fluid>
-      <Container
+    <Container
+     
+
+      sx={(theme) => ({
+        display: "flex",
+        flexDirection: "column",
+        [theme.fn.smallerThan("sm")]: {
+          minHeight: `100vh`,
+        },
+        [theme.fn.largerThan("md")]: {
+          height: `100vh`,
+        },
+      })}
+      m={"0"}
+      p={"0"}
+      fluid
+    >
+      {" "}
+      <Box
         pos={"relative"}
-        m={"0"}
-        mx={"auto"}
-        p={"0"}
-        px={"md"}
-        h={"80vh"}
-        w={"100%"}
+        sx={(theme) => ({
+          [theme.fn.smallerThan("sm")]: {
+            minHeight: `calc(${mainSectionHeight} + 100vh)`,
+          },
+          [theme.fn.largerThan("md")]: {
+            height: `calc(${mainSectionHeight} + 100vh)`,
+          },
+        })}
       >
-        <Header />
+        <Box style={{ position: "relative", zIndex: 1 }} mt={"lg"} px={34}>
+          <Header />
+        </Box>
         <Box
-          w={"100%"}
+          // w={"100%"}
           // py={"md"}
           pos={"relative"}
-          top={-64}
-          style={{ zIndex: -1 }}
+          top={-92}
+          // h={"70vh"}
+          px={"md"}
+          sx={(theme) => ({
+            [theme.fn.smallerThan("sm")]: {
+              minHeight: `calc(${mainSectionHeight} + 100vh)`,
+            },
+            [theme.fn.largerThan("md")]: {
+              height: `calc(${mainSectionHeight} + 100vh)`,
+            },
+          })}
         >
           <Outlet />
         </Box>
-      </Container>
-
-      <Box pos={'relative'} bottom={0}>
+      </Box>
+      <Box
+        sx={(theme) => ({
+          [theme.fn.smallerThan("sm")]: {
+            height: "auto",
+          },
+          [theme.fn.largerThan("md")]: {
+            height: `calc(${mainSectionHeight} + 100vh)`,
+          },
+          position: "relative",
+          zIndex: 2,
+        })}
+      >
         <Footer />
       </Box>
+      {/* <LiveChat/> */}
     </Container>
   );
 };

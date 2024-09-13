@@ -1,7 +1,10 @@
 import { Text } from "@mantine/core";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function FooterMenu({ title = "", links = [] }) {
+  const {t}=useTranslation()
+
   const items = links.map((link, index) => (
     <Link
       style={{
@@ -22,7 +25,7 @@ function FooterMenu({ title = "", links = [] }) {
         // component="a"
         // onClick={(event) => event.preventDefault()}
       >
-        {link.label}
+        {t(link.label)}
       </Text>
     </Link>
   ));
@@ -30,7 +33,7 @@ function FooterMenu({ title = "", links = [] }) {
   return (
     <div   >
       <Text pl={'xs'} color="about.3" fz={"lg"} fw={"700"}>
-        {title}
+        {t(title)}
       </Text>
       {items}
     </div>

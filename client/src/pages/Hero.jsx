@@ -33,14 +33,14 @@ function Hero() {
       exit="out"
       variants={pageVariants}
       transition={pageTransition}
-      style={{ position: "relative", height:'100vh' }}
+      style={{ position: "relative", height: "100vh" }}
     >
       {" "}
-
+      <Container>
         <Header />
-        <HeroContent />
-
-        <FooterArrow to={"pages"} />
+      </Container>
+      <HeroContent />
+      <FooterArrow to={"pages"} />
     </motion.div>
   );
 }

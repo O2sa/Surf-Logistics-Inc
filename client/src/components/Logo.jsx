@@ -1,10 +1,22 @@
 import { Image } from "@mantine/core";
-import logo from "../assets/logo.svg";
-import whiteLogo from "../assets/light_logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Logo = ({ header = false }) => {
-  const source = header ? whiteLogo : logo;
-  return <Image width={"100%"} src={source} alt="Site Logo" />;
+  const nav = useNavigate();
+  const source = header ? "/assets/light_logo.png" : "/assets/logo.svg";
+  return (
+    <Image
+      sx={{
+        "&:hover": {
+          cursor: "pointer",
+        },
+      }}
+      width={"100%"}
+      onClick={() => nav("/")}
+      src={source}
+      alt="Site Logo"
+    />
+  );
 };
 
 export default Logo;

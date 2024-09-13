@@ -6,7 +6,18 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const Hero = React.lazy(() => import("./pages/Hero"));
 const Cards = React.lazy(() => import("./pages/Cards"));
 const Pages = React.lazy(() => import("./pages/Pages"));
-const About = React.lazy(() => import("./pages/About"));
+const Page = React.lazy(() => import("./pages/Page"));
+const AboutContent = React.lazy(() => import("./components/AboutContent"));
+const Services = React.lazy(() => import("./components/Services"));
+const ConsultationAndQuote = React.lazy(() =>
+  import("./components/ConsultationAndQuote")
+);
+const QuotePage = React.lazy(() => import("./components/QuoteForm"));
+const ReachPage = React.lazy(() => import("./components/Reach"));
+const ConsultationPage = React.lazy(() =>
+  import("./components/ConsultationForm")
+);
+
 import { AnimatePresence } from "framer-motion";
 function App() {
   return (
@@ -14,6 +25,7 @@ function App() {
       withGlobalStyles
       withNormalizeCSS
       theme={{
+        fontFamily: "Montserrat, sans-serif",
         colorScheme: "light",
         colors: {
           brand: [
@@ -32,9 +44,10 @@ function App() {
             "#C384D4",
             "#AE5AC5",
             "#983EB0",
-            "#7F3493", //main
             "#662A76",
             "#51215E",
+            "#7F3493", //main
+
             "#411B4B",
             "#34153C",
             "#2A1130",
@@ -44,9 +57,11 @@ function App() {
             "#76DCFF",
             "#43CFFF",
             "#16C4FF",
-            "#00B2EF", //main
             "#0096C9",
+
             "#007EA9",
+            "#00B2EF", //main
+
             "#006A8E",
             "#005977",
             "#004A64",
@@ -56,9 +71,9 @@ function App() {
             "#E4F1D2",
             "#C2E098",
             "#A5D267",
-            "#8DC63F", //main
             "#71A130",
             "#5B8126",
+            "#8DC63F", //main
             "#48671F",
             "#3A5218",
             "#2E4214",
@@ -68,9 +83,10 @@ function App() {
             "#FEF0DF",
             "#FBCB92",
             "#F9AC52",
-            "#F7931D", //main
             "#D57708",
             "#AB5F06",
+            "#F7931D", //main
+
             "#884C05",
             "#6D3D04",
             "#573103",
@@ -88,7 +104,62 @@ function App() {
               <Route path="/" element={<Hero />} />
               <Route path="/pages" element={<Pages />}>
                 <Route index element={<Cards />} />
-                <Route path="about" element={<About />} />
+                <Route
+                  path="about"
+                  element={
+                    <Page color="about" title="About">
+                      <AboutContent />
+                    </Page>
+                  }
+                />
+                <Route
+                  path="services"
+                  element={
+                    <Page color="services" title="Services">
+                      <Services />
+                    </Page>
+                  }
+                />
+                <Route
+                  path="reach"
+                  element={
+                    <Page color="#AFD778" contentColor="reach" title="Reach">
+                      <ReachPage />
+                    </Page>
+                  }
+                />
+                <Route
+                  path="consultation-quote"
+                  element={
+                    <Page color="quote" title="Consultation & Quote">
+                      <ConsultationAndQuote />
+                    </Page>
+                  }
+                />
+                <Route
+                  path="consultation-quote/quote"
+                  element={
+                    <Page
+                      color="#F9B360"
+                      contentColor="quote"
+                      title="Free Quote Form"
+                    >
+                      <QuotePage />
+                    </Page>
+                  }
+                />
+                <Route
+                  path="consultation-quote/consultation"
+                  element={
+                    <Page
+                      color="#F9B360"
+                      contentColor="quote"
+                      title="Free Consultation Form"
+                    >
+                      <ConsultationPage />
+                    </Page>
+                  }
+                />
               </Route>
             </Routes>
           </Suspense>
