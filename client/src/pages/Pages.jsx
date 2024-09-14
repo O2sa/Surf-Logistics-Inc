@@ -5,19 +5,17 @@ import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mantine/core";
 import { useMediaQuery, useViewportSize } from "@mantine/hooks";
 import LiveChat from "../components/LiveChat";
-import { mainSectionHeight } from "../utils/constants";
+import { layoutStyle, mainSectionHeight } from "../utils/constants";
 
 const Pages = () => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { height } = useViewportSize();
   return (
     <Container
-     
-
       sx={(theme) => ({
         display: "flex",
         flexDirection: "column",
-        [theme.fn.smallerThan("sm")]: {
+        [theme.fn.smallerThan("md")]: {
           minHeight: `100vh`,
         },
         [theme.fn.largerThan("md")]: {
@@ -30,17 +28,12 @@ const Pages = () => {
     >
       {" "}
       <Box
-        pos={"relative"}
         sx={(theme) => ({
-          [theme.fn.smallerThan("sm")]: {
-            minHeight: `calc(${mainSectionHeight} + 100vh)`,
-          },
-          [theme.fn.largerThan("md")]: {
-            height: `calc(${mainSectionHeight} + 100vh)`,
-          },
+          position: "relative",
+          ...layoutStyle(theme),
         })}
       >
-        <Box style={{ position: "relative", zIndex: 1 }} mt={"lg"} px={34}>
+        <Box style={{ position: "relative", zIndex: 2 }} mt={"lg"} px={34}>
           <Header />
         </Box>
         <Box
@@ -51,12 +44,7 @@ const Pages = () => {
           // h={"70vh"}
           px={"md"}
           sx={(theme) => ({
-            [theme.fn.smallerThan("sm")]: {
-              minHeight: `calc(${mainSectionHeight} + 100vh)`,
-            },
-            [theme.fn.largerThan("md")]: {
-              height: `calc(${mainSectionHeight} + 100vh)`,
-            },
+            ...layoutStyle(theme),
           })}
         >
           <Outlet />
@@ -64,11 +52,10 @@ const Pages = () => {
       </Box>
       <Box
         sx={(theme) => ({
-          [theme.fn.smallerThan("sm")]: {
-            height: "auto",
-          },
+          height: "auto",
+
           [theme.fn.largerThan("md")]: {
-            height: `calc(${mainSectionHeight} + 100vh)`,
+            height: `10rem`,
           },
           position: "relative",
           zIndex: 2,

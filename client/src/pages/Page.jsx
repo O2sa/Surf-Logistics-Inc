@@ -24,8 +24,8 @@ function Page({
         bg={contentColor}
         sx={(theme) => ({
           height: "auto",
-
-          [theme.fn.smallerThan("sm")]: {
+          overflowY: "scroll",
+          [theme.fn.smallerThan("md")]: {
             height: "auto",
           },
           [theme.fn.largerThan("md")]: {
@@ -35,7 +35,7 @@ function Page({
 
         // h={"30vh"}
       >
-        <Container size={"xl"} my={"lg"}>
+        <Container fluid my={"lg"}>
           {children}
         </Container>
       </Box>

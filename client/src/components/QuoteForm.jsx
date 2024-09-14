@@ -51,6 +51,8 @@ const QuoteForm = () => {
         sx={{ borderRadius: "4px" }}
         bg={"white"}
         // w={'100%'}
+        fz={'xs'}
+        size="xs"
         key={val}
         value={val}
         label={t(val)}
@@ -58,7 +60,7 @@ const QuoteForm = () => {
     ));
 
   return (
-    <Grid gutter={"lg"}>
+    <Grid gutter={"lg"} fz={'xs'} style={{fontSize:'12px !important'}}>
       <Grid.Col
         style={{
           display: "flex",
@@ -67,6 +69,8 @@ const QuoteForm = () => {
         }}
         span={12}
         sm={6}
+        md={4}
+        lg={3}
       >
         <Box mb={"md"} w={"fit-content"}>
           <Radio.Group
@@ -75,7 +79,7 @@ const QuoteForm = () => {
             withAsterisk
             // w={'100%'}
           >
-            <SimpleGrid
+            <Stack
               // spacing={"xs"}
               spacing={4}
               breakpoints={[
@@ -84,13 +88,13 @@ const QuoteForm = () => {
               ]}
             >
               {returnRadioList(shippingOptions)}
-            </SimpleGrid>
+            </Stack>
           </Radio.Group>
         </Box>
 
         {/* <Select label={t("Consultation Interest")} /> */}
       </Grid.Col>{" "}
-      <Grid.Col span={12} sm={4}>
+      <Grid.Col span={12} sm={6} md={4} lg={3}>
         {" "}
         <Box w={"fit-content"}>
           <Text size={"sm"}>{t("Item Description")}</Text>
@@ -114,7 +118,7 @@ const QuoteForm = () => {
           </Group>{" "}
         </Box>
       </Grid.Col>
-      <Grid.Col span={12} sm={6}>
+      <Grid.Col span={12} sm={6} md={4} lg={3}>
         <Box mb={"md"}>
           <TextInput
             label={t("Pickup Location")}
@@ -122,13 +126,11 @@ const QuoteForm = () => {
             placeholder={t("Postal Code")}
             required
             mb={4}
-
           />
           <DatePickerInput
             placeholder={t("Pickup Date")}
             required
             icon={<IconCalendar size="1.1rem" stroke={1.5} />}
-
             mx="auto"
           />
         </Box>
@@ -142,7 +144,7 @@ const QuoteForm = () => {
           </Stack>
         </Radio.Group>
       </Grid.Col>{" "}
-      <Grid.Col span={12} sm={6}>
+      <Grid.Col span={12} sm={6} md={4} lg={3}>
         <Box mb={"md"}>
           <TextInput
             label={t("Delivery Location")}
