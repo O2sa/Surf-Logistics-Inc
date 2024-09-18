@@ -35,7 +35,16 @@ function Page({
 
         // h={"30vh"}
       >
-        <Container fluid my={"lg"}>
+        <Container
+          style={{
+            // display:'flex',
+            // alignContent:"center",
+            // justifyContent: "space-around",
+            // alignItems: "center",
+          }}
+          size={'lg'}
+          my={"lg"}
+        >
           {children}
         </Container>
       </Box>

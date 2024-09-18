@@ -4,10 +4,13 @@ import {
   IconPhoto,
   IconMessageCircle,
   IconMenu2,
+  IconUser,
+  IconUserSquare,
 } from "@tabler/icons-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "./AuthProvider";
 
 const links = [
   { label: "Home", link: "/" },
@@ -22,12 +25,18 @@ const links = [
 ];
 
 function HeaderMenu() {
+  const nav = useNavigate();
+  // const { isAuthenticated } = useAuth();
   return (
     <Group>
-            <LanguageSwitcher />
+ 
+
+      <ActionIcon color="brand" onClick={() => nav("/dashboard")}>
+        <IconUserSquare color="white"/>
+      </ActionIcon>
+      <LanguageSwitcher />
 
       <Links />
-
     </Group>
   );
 }
@@ -50,7 +59,7 @@ function Links() {
         </div>
       </Menu.Target>
 
-      <Menu.Dropdown sx={{ position: "absolute" }}>
+      <Menu.Dropdown sx={{ position: "absolute", }}>
         {links.map((val, idx) => (
           <Menu.Item onClick={() => nav(val.link)} key={idx}>
             {t(val.label)}

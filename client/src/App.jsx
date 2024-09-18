@@ -1,5 +1,5 @@
-import { Loader, MantineProvider } from "@mantine/core";
-import React, { Suspense } from "react";
+import { MantineProvider } from "@mantine/core";
+import React, { createContext, Suspense, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // import Hero from "./pages/Hero";
@@ -14,12 +14,38 @@ const ConsultationAndQuote = React.lazy(() =>
 );
 const QuotePage = React.lazy(() => import("./components/QuoteForm"));
 const ReachPage = React.lazy(() => import("./components/Reach"));
+const Dash = React.lazy(() => import("./pages/DashboardLayout"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Register = React.lazy(() => import("./pages/Register"));
+// const Quotes = React.lazy(() => import("./pages/Quotes"));
+// const Messages = React.lazy(() => import("./pages/Messages"));
+// const Consultations = React.lazy(() => import("./pages/Consultations"));
+const Profile = React.lazy(() => import("./pages/Profile"));
+import Quotes from './pages/Quotes'
+import Consultations from "./pages/Consultations";
+import Messages from "./pages/Messages";
+
 const ConsultationPage = React.lazy(() =>
   import("./components/ConsultationForm")
 );
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
+
+const AppContext = createContext();
+
 import { AnimatePresence } from "framer-motion";
-function App() {
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Loader from "./components/Loader";
+import { AuthProvider } from "./components/AuthProvider";
+import { Notifications } from "@mantine/notifications";
+import ProtectedRoute from "./components/ProtectedRoute";
+export default function App() {
   return (
     <MantineProvider
       withGlobalStyles
@@ -97,89 +123,112 @@ function App() {
         primaryShade: 5,
       }}
     >
+      <Notifications position="top-center" />
       <AnimatePresence mode="wait">
-        <Router>
-          <Suspense
-            fallback={
-              <Loader
-              size={'xl'}
-                style={{
-                  left: "50%",
-                  top: "40%",
-                  position:'absolute',
-                  transform: "translateX(-50%)",
-                }}
-                variant="bars"
-              />
-            }
+        {" "}
+        <QueryClientProvider client={queryClient}>
+          <AppContext.Provider
+            value={{
+              queryClient,
+            }}
           >
-            <Routes>
-              <Route path="/" element={<Hero />} />
-              <Route path="/pages" element={<Pages />}>
-                <Route index element={<Cards />} />
-                <Route
-                  path="about"
-                  element={
-                    <Page color="about" title="About">
-                      <AboutContent />
-                    </Page>
-                  }
-                />
-                <Route
-                  path="services"
-                  element={
-                    <Page color="services" title="Services">
-                      <Services />
-                    </Page>
-                  }
-                />
-                <Route
-                  path="reach"
-                  element={
-                    <Page color="#AFD778" contentColor="reach" title="Reach">
-                      <ReachPage />
-                    </Page>
-                  }
-                />
-                <Route
-                  path="consultation-quote"
-                  element={
-                    <Page color="quote" title="Consultation & Quote">
-                      <ConsultationAndQuote />
-                    </Page>
-                  }
-                />
-                <Route
-                  path="consultation-quote/quote"
-                  element={
-                    <Page
-                      color="#F9B360"
-                      contentColor="quote"
-                      title="Free Quote Form"
-                    >
-                      <QuotePage />
-                    </Page>
-                  }
-                />
-                <Route
-                  path="consultation-quote/consultation"
-                  element={
-                    <Page
-                      color="#F9B360"
-                      contentColor="quote"
-                      title="Free Consultation Form"
-                    >
-                      <ConsultationPage />
-                    </Page>
-                  }
-                />
-              </Route>
-            </Routes>
-          </Suspense>
-        </Router>
+            <Router>
+              {" "}
+              <Suspense fallback={<Loader />}>
+                <Routes>
+                  <Route path="/" element={<Hero />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/login" element={<Login />} />{" "}
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <AuthProvider>
+                          <Dash />
+                        </AuthProvider>
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<Quotes />} />
+                    <Route path="consultations" element={<Consultations />} />
+                    <Route path="messages" element={<Messages />} />
+                    <Route path="profile" element={<Profile />} />
+                  </Route>
+                  <Route path="/pages" element={<Pages />}>
+                    <Route index element={<Cards />} />
+                    <Route
+                      path="about"
+                      element={
+                        <Page color="about" title="About">
+                          <AboutContent />
+                        </Page>
+                      }
+                    />
+                    <Route
+                      path="services"
+                      element={
+                        <Page color="services" title="Services">
+                          <Services />
+                        </Page>
+                      }
+                    />
+                    <Route
+                      path="reach"
+                      element={
+                        <Page
+                          color="#AFD778"
+                          contentColor="reach"
+                          title="Reach Out"
+                        >
+                          <ReachPage />
+                        </Page>
+                      }
+                    />
+                    <Route
+                      path="consultation-quote"
+                      element={
+                        <Page color="quote" title="Consultation & Quote">
+                          <ConsultationAndQuote />
+                        </Page>
+                      }
+                    />
+                    <Route
+                      path="consultation-quote/quote"
+                      element={
+                        <ProtectedRoute>
+                          <Page
+                            color="#F9B360"
+                            contentColor="quote"
+                            title="Free Quote Form"
+                          >
+                            <QuotePage />
+                          </Page>
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="consultation-quote/consultation"
+                      element={
+                        <ProtectedRoute>
+                          <Page
+                            color="#F9B360"
+                            contentColor="quote"
+                            title="Free Consultation Form"
+                          >
+                            <ConsultationPage />
+                          </Page>
+                        </ProtectedRoute>
+                      }
+                    />
+                  </Route>
+                </Routes>
+              </Suspense>{" "}
+            </Router>
+          </AppContext.Provider>
+        </QueryClientProvider>
       </AnimatePresence>
     </MantineProvider>
   );
 }
 
-export default App;
+export const useAppContext = () => useContext(AppContext);

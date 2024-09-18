@@ -1,7 +1,10 @@
 // src/App.js
 import { useTranslation } from "react-i18next";
 import "../i18n"; // Import the i18n configuration
-import { Button, Group, Select } from "@mantine/core";
+import { Box, Button, Flex, Group, rem, Select } from "@mantine/core";
+import { forwardRef } from "react";
+
+
 
 const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
@@ -13,12 +16,12 @@ const LanguageSwitcher = () => {
 
   return (
     <Select
-      w={"7rem"}
-      bg={"br"}
+      w={"8rem"}
+      color="white"
       sx={(theme) => ({
         input: {
           backgroundColor: "transparent",
-          color: theme.colors.quote[5],
+          color: "white",
           border: "none",
         },
         item: {
@@ -27,10 +30,11 @@ const LanguageSwitcher = () => {
       })}
       defaultValue={i18n.language}
       data={[
-        { label: "English", value: "en" },
-        { label: "Français", value: "fr" },
+        { label: "🇺🇸 English", value: "en", flag: "🇺🇸" },
+        { label: "🇫🇷 Français", value: "fr", flag: "🇫🇷" },
       ]}
       onChange={changeLanguage}
+
     />
   );
 };

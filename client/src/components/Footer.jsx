@@ -22,7 +22,7 @@ const data = [
     links: [
       { label: "About", link: "/pages/about" },
       { label: "Services", link: "/pages/services" },
-      { label: "Reach Out", link: "#" },
+      { label: "Reach Out", link: "/pages/reach" },
       { label: "Consultation & Quote", link: "/pages/consultation-quote" },
     ],
   },

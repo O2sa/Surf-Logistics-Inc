@@ -11,25 +11,25 @@ const cardsData = [
     name: "About",
     color: "about",
     to: "about",
-    image: "/assets/images/about.jpg",
+    image: "/assets/images/about.png",
   },
   {
     name: "Services",
     color: "services",
     to: "services",
-    image: "/assets/images/services.jpg",
+    image: "/assets/images/services.png",
   },
   {
     name: "Reach Out",
     color: "reach",
     to: "reach",
-    image: "/assets/images/reach.jpg",
+    image: "/assets/images/reach.png",
   },
   {
     name: "Consultation & Quote",
     color: "quote",
     to: "consultation-quote",
-    image: "/assets/images/quote.jpg",
+    image: "/assets/images/quote.png",
   },
 ];
 
@@ -54,7 +54,7 @@ const Cards = () => {
           <Grid.Col xs={12}>
             <CustomCard isPage data={cardsData.find((val) => val.to == page)} />
           </Grid.Col>
-          <FooterArrow to={page} color="brand"/>
+          <FooterArrow to={page} color="white"/>
         </>
       )}
     </Grid>

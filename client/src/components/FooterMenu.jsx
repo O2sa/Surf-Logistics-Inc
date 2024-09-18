@@ -27,6 +27,8 @@ function FooterMenu({ title = "", links = [] }) {
       >
         {t(link.label)}
       </Text>
+
+      
     </Link>
   ));
 

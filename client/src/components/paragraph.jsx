@@ -18,12 +18,12 @@ const Paragraph = ({
   const { t } = useTranslation();
 
   return (
-    <Box>
+    <Box m={'auto'}>
       <Title c={titleColor} order={4}>
         {t(title)}
       </Title>
 
-      <Text mb={'md'} c={desColor}>{t(description)}</Text>
+      <Text maw={'900px'} mb={'md'} c={desColor}>{t(description)}</Text>
     </Box>
   );
 };

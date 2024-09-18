@@ -21,6 +21,7 @@ import connectDB from "./configs/connect.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import quoteRouter from "./routes/quoteRouter.js";
+import messageRouter from "./routes/messageRouter.js";
 import consultationRouter from "./routes/consultationRouter.js";
 
 // public
@@ -35,9 +36,7 @@ import {
   authorizePermissions,
 } from "./middleware/authMiddleware.js";
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -45,15 +44,14 @@ if (process.env.NODE_ENV === "development") {
 
 // app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+// if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
 
   // Serve the frontend for any other route
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
   });
-}
-
+// }
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -73,18 +71,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // CSP configuration with helmet
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      connectSrc: [
-        "'self'",
-    
-      ],
-      
-    },
-  })
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       connectSrc: [
+//         "'self'",
+
+//       ],
+
+//     },
+//   })
+// );
 
 // Parse cookies
 app.use(cookieParser());
@@ -104,29 +102,22 @@ app.get("/", (req, res) => {
   res.send("system up!");
 });
 
-
-
-
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", authenticateUser);
 
 app.use("/api/v1/current-user", userRouter);
 
-app.use(
-  "/api/v1/quotes",
-  authorizePermissions(["admin"]),
-  quoteRouter
-);
+app.use("/api/v1/quotes", authorizePermissions(["admin"]), quoteRouter);
 app.use(
   "/api/v1/consultations",
   authorizePermissions(["admin"]),
   consultationRouter
 );
-
-
-
-
-
+app.use(
+  "/api/v1/messages",
+  authorizePermissions(["admin"]),
+  messageRouter
+);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });

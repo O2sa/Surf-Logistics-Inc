@@ -18,13 +18,53 @@ import {
 } from "@tabler/icons-react";
 import ButtonWithArrow from "./ButtonWithArrow";
 import { useNavigate } from "react-router-dom";
+import { isEmail, isNotEmpty, useForm } from "@mantine/form";
+import { getNotfication } from "../utils/notfications";
+import customFetch from "../utils/customFetch";
 
 const Reach = () => {
   const { t } = useTranslation();
   const nav=useNavigate()
   const onClick=(route)=>nav(route)
+  const form = useForm({
+    initialValues: {
+      name: "",
+      subject: "",
+      email: "",
+    
+    },
+
+    validate: {
+      name: isNotEmpty(),
+      subject: isNotEmpty(),
+      
+      email: isEmail(),
+     
+    },
+  });
+
+
+  const handleSubmit = async (values) => {
+    console.log("Date in UTC:", values);
+    try {
+      await customFetch.post("/current-user/add-reach",values);
+      getNotfication(
+        true,
+        t('"Your message has been sent successfully."')
+      );
+      nav("/");
+    } catch (error) {
+      getNotfication(false, error?.response?.data?.msg);
+    }
+  };
+
+
+
   return (
-    <Grid gutter={"lg"}>
+    <Grid  justify={"space-around"}>
+
+
+
       <Grid.Col
         style={{
           display: "flex",
@@ -33,14 +73,13 @@ const Reach = () => {
         }}
         span={12}
         md={6}
-        pr={"xl"}
       >
         <Box>
           <Title c={"brand"} order={5}>
             {t("Got Questions?")}
           </Title>
 
-          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"}>
+          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"} maw={'300px'}>
             {`${t("Call us at")} `}
             <span style={{ color: "white" }}>514-816-1182</span>
             {` ${t("to explore exciting business opportunities with us.")}`}
@@ -51,7 +90,7 @@ const Reach = () => {
             {t("Prefer Email?")}
           </Title>
 
-          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"}>
+          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"} maw={'300px'}>
             {`${t("Shoot us a message at")} `}
             <span style={{ color: "white" }}>info@surflogistics.ca</span>
             {` ${t(
@@ -61,6 +100,8 @@ const Reach = () => {
         </Box>
       </Grid.Col>{" "}
       <Grid.Col span={12} md={6}>
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+
         <TextInput
           mb={"md"}
           sx={(theme) => ({
@@ -74,7 +115,8 @@ const Reach = () => {
               borderRadius: "0",
             },
           })}
-          type="text"
+          {...form.getInputProps("name")}
+          required
           placeholder={t("Your name")}
         />
         <TextInput
@@ -89,14 +131,16 @@ const Reach = () => {
               borderRadius: "0",
             },
           })}
+          required
           mb={"md"}
-          type="email"
+          {...form.getInputProps("email")}
           placeholder={t("Your email")}
         />
         <Textarea
           autosize
           minRows={4}
           maxRows={8}
+          required
           sx={(theme) => ({
             textarea: {
               backgroundColor: "transparent",
@@ -109,11 +153,13 @@ const Reach = () => {
             },
           })}
           mb={"md"}
+          {...form.getInputProps("comments")}
           placeholder={t("Tell us about your project")}
         />
-        <Box ta={"end"}>
-          <ButtonWithArrow text="Lets do it" />
+        <Box  onClick={()=>handleSubmit(form.values)} ta={"end"}>
+          <ButtonWithArrow  text="Lets do it" />
         </Box>
+        </form>
       </Grid.Col>
     </Grid>
   );

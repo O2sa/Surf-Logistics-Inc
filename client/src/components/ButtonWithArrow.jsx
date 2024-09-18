@@ -3,14 +3,21 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const ButtonWithArrow = ({ textColor = "white", text = "",onClick }) => {
+const ButtonWithArrow = ({
+  textColor = "white",
+  text = "",
+  onClick,
+  isLoading = false,
+}) => {
   const theme = useMantineTheme();
   const { t } = useTranslation();
   return (
     <Button
       c={textColor}
       variant="subtle"
-      fw={'normal'}
+      fw={"normal"}
+      loading={isLoading}
+      type="submit"
       onClick={onClick}
       leftIcon={
         <IconArrowNarrowRight

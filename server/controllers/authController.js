@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import User from "../models/User.js";
 import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
 import { UnauthenticatedError } from "../errors/customErrors.js";
-import { createJWT } from "../utils/tokenUtils.js";
+import { createJWT, verifyJWT } from "../utils/tokenUtils.js";
 
 export const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
@@ -31,11 +31,27 @@ export const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ msg: "user created" });
 };
 
-export const login = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+export const isAuthenticated = async (req, res, next) => {
+  const { token } = req.cookies;
+  // const testUser = userId === "64b2c07ccac2efc972ab0eca";
+  let isAuthenticated = true;
 
-  // console.log("user", user);
-  // console.log("body", req.body);
+  if (!token) {
+    isAuthenticated = false;
+  } else {
+    const { userId } = verifyJWT(token);
+    const user = await User.findById(userId).select("-password");
+
+    if (!user) isAuthenticated = false;
+  }
+  res.status(StatusCodes.OK).json({ isAuthenticated: isAuthenticated });
+};
+
+export const login = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email }).select("password");
+
+  console.log("user", user);
+  console.log("body", req.body);
 
   const isValidUser =
     user && (await comparePassword(req.body.password, user.password));

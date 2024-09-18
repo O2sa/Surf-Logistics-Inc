@@ -11,84 +11,108 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
+const shippingOptions = [
+  "PTL (Partial Truckload)",
+  "LTL (Less-Than-Truckload)",
+  "FTL (Full Truckload)",
+  "International Shipping",
+  "Expedited Shipping",
+  "Temperature Controlled",
+  "Heavy Haul",
+  "White Glove",
+];
 
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 import { useNavigate } from "react-router-dom";
-import { DatePicker, TimeInput } from "@mantine/dates";
+import { DatePicker, DateTimePicker, TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
+import { useForm } from "@mantine/form";
+import { getNotfication } from "../utils/notfications";
+import customFetch from "../utils/customFetch";
+import { convertLocalDateToUtc } from "../utils/utils";
 const ConsultationForm = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const form = useForm({
+    initialValues: {
+      consultationInterest: "",
+      email: "",
+      comments: "",
+      date: null,
+      time: null,
+    },
+
+    validate: {
+      // Validate that the appointment date is not in the past
+      date: (value) =>
+        value && dayjs(value).isBefore(dayjs(), "day")
+          ? "Appointment date cannot be in the past"
+          : null,
+
+      // Ensure time is picked
+      time: (value) => (value ? null : "Please pick an appointment time"),
+    },
+  });
+
+  const handleSubmit = async (values) => {
+    try {
+      await customFetch.post("/current-user/add-consultation", {
+        ...values,
+        date: convertLocalDateToUtc(values.date),
+      });
+      getNotfication(
+        true,
+        t('"Your free quote request has been sent successfully."')
+      );
+      navigate("/dashboard/consultations");
+    } catch (error) {
+      getNotfication(false, error?.response?.data?.msg);
+    }
+  };
+
   return (
-    <Grid gutter={"lg"} justify="center">
-      <Grid.Col
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          // justifyContent: "space-between",
-        }}
-        span={"content"}
-        md={4}
-      >
-        <Box mb={"md"}>
-          <TextInput
-            label={t("Full Name")}
-            type="text"
-            placeholder={t("First Name")}
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Grid gutter={"lg"} justify="center">
+        <Grid.Col span={"content"} md={4}>
+          <Select
+            data={shippingOptions}
+            required
+            label={t("Consultation Interest")}
+            {...form.getInputProps("consultationInterest")}
+            mb={"sm"}
+          />
+          <DateTimePicker
+            // bg={"white"}
+            // w={"fit-content"}
+            required
+            label={t("Appointment Date")}
+            {...form.getInputProps("date")}
+          />{" "}
+        </Grid.Col>{" "}
+        <Grid.Col span={"content"} md={4}>
+          {/* <TimeInput
+            label={t("Appointment Time")}
+            icon={<IconClock size="1rem" stroke={1.5} />}
+            maw={400}
+            mb={"md"}
+            {...form.getInputProps("time")}
+          /> */}
+          <Textarea
+            mb={"md"}
+            label={t("Additional Information / Comments")}
+            {...form.getInputProps("comments")}
             required
           />
-          <TextInput placeholder={t("Last Name")} required />
-        </Box>
-        <Box mb={"md"}>
-          <PhoneInput
-            country={"us"} // Set default country
-            // value={phone}
-            // onChange={handlePhoneChange}
-            enableSearch={true} // Enable country code search
-            placeholder="Enter phone number"
-          />
-          {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
-        </Box>
-        <TextInput
-          label={t("E-mail")}
-          mb={'md'}
-          placeholder={t("example@example.com")}
-          required
-        />
-        <TextInput
-          label={t("Company or Organization Name")}
-        />
-        {/* <Select label={t("Consultation Interest")} /> */}
-      </Grid.Col>{" "}
-      <Grid.Col span={"content"} md={4} >
-        <Text size={'sm'}>
-        {t("Appointment Date")}
-        </Text>
-        <DatePicker
-        
-          bg={"white"}
-          w={"fit-content"}
-          label={t("Appointment Date")}
-        />{" "}
-      </Grid.Col>{" "}
-      <Grid.Col span={12} md={4}>
-        <TimeInput
-          label={t("Appointment Time")}
-          icon={<IconClock size="1rem" stroke={1.5} />}
-          maw={400}
-          mb={"md"}
-        />
-        <Textarea
-          mb={"md"}
-          label={t("Additional Information / Comments")}
-          required
-        />
-        <Button fullWidth>{t("Submit")}</Button>
-      </Grid.Col>
-    </Grid>
+          <Button type="submit" fullWidth>
+            {t("Submit")}
+          </Button>
+        </Grid.Col>
+      </Grid>
+    </form>
   );
 };
 

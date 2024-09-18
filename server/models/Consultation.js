@@ -14,13 +14,17 @@ const consultation = new Schema(
       type: Date,
       required: [true, "Please provide name"],
     },
+    time: {
+      type: String,
+      required: [true, "Please provide name"],
+    },
     consultationInterest: {
-      type: Date,
+      type: String,
       required: [true, "Please provide name"],
     },
     state: {
       type: String,
-      enum: [ "approved", "pending"],
+      enum: ["approved", "pending", "canceled"],
       default: "pending",
     },
   },

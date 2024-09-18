@@ -1,13 +1,11 @@
 {
 
-	"name": "mern-app",
+	"name": "app",
 	"version": "1.0.0",
 	"scripts": {
-	  "client": "pnpm --filter client dev",    
-	  "server": "pnpm --filter server dev",    
-	  "dev": "concurrently \"pnpm run server\" \"pnpm run client\"",  
-	  "build": "pnpm --filter client build",  
-	  "start": "pnpm run build && pnpm --filter server start" 
+		"dev": "concurrently \"pnpm --filter server dev\" \"pnpm --filter client dev\"",
+		"server": "pnpm --filter server dev",
+		"client": "pnpm --filter client dev"
 	},
 	"dependencies": {
 		"concurrently": "^9.0.1"

@@ -2,7 +2,9 @@ import {
   Box,
   Container,
   Divider,
+  Flex,
   Image,
+  MediaQuery,
   rem,
   Text,
   Title,
@@ -16,19 +18,13 @@ const AboutContent = () => {
   const { t } = useTranslation();
 
   return (
-    <Box
-      pt={"xl"}
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-      }}
-    >
+    <Flex gap={'sm'} pt={"xl"} align={"center"} wrap={"wrap"} justify={"center"}>
       <Box w={"44"}>
         <Logo />
       </Box>
-      <Divider orientation="vertical" size={"sm"} color={"black"} mx="lg" />
+      <MediaQuery smallerThan={"sm"} styles={{ display: "none" }}>
+        <Divider orientation="vertical" size={"sm"} color={"black"} mx="lg" />
+      </MediaQuery>
       <Box w={"60%"}>
         <Paragraph
           title="Surf Logistics Inc."
@@ -47,7 +43,7 @@ const AboutContent = () => {
           )}
         </Text>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

@@ -17,6 +17,7 @@ const Pages = () => {
         flexDirection: "column",
         [theme.fn.smallerThan("md")]: {
           minHeight: `100vh`,
+          justifyContent: "space-between",
         },
         [theme.fn.largerThan("md")]: {
           height: `100vh`,
@@ -63,7 +64,7 @@ const Pages = () => {
       >
         <Footer />
       </Box>
-      {/* <LiveChat/> */}
+      <LiveChat/>
     </Container>
   );
 };

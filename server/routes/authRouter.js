@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import { login, logout, register } from "../controllers/authController.js";
+import { isAuthenticated, login, logout, register } from "../controllers/authController.js";
 import {
   validateRegisterInput,
   validateLoginInput,
@@ -17,5 +17,6 @@ const apiLimiter = rateLimiter({
 router.post("/register", apiLimiter, validateRegisterInput, register);
 router.post("/login", apiLimiter, validateLoginInput, login);
 router.get("/logout", logout);
+router.get("/isAuthenticated", isAuthenticated);
 
 export default router;

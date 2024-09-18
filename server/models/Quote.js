@@ -21,26 +21,22 @@ const quote = new Schema(
       type: mongoose.Schema.ObjectId,
       ref: "User",
     },
-    delivery: {
-      postalCode: {
+      pickupPostalCode: {
         type: String,
         required: true,
       },
-      date: {
+      pickupDate: {
         type: Date,
         required: true,
       },
-    },
-    pickup: {
-      postalCode: {
+      deliveryPostalCode: {
         type: String,
         required: true,
       },
-      date: {
+      deliveryDate: {
         type: Date,
         required: true,
       },
-    },
   },
   { timestamps: true }
 );
