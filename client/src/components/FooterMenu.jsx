@@ -9,10 +9,13 @@ function FooterMenu({ title = "", links = [] }) {
     <Link
       style={{
         display: "block",
-        // textDecoration: "none",
+        textDecoration: "none",
+        textDecorationColor: 'white',
 
         "&:hover": {
+          textDecorationColor: 'white !important',
           textDecoration: "underline !important",
+
         },
       }}
       to={link.link}
