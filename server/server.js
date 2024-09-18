@@ -42,16 +42,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-// app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
-// if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
-
-  // Serve the frontend for any other route
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
-  });
-// }
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -68,7 +59,7 @@ const corsOptions = {
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 // CSP configuration with helmet
 
 // app.use(
@@ -118,6 +109,17 @@ app.use(
   authorizePermissions(["admin"]),
   messageRouter
 );
+
+// app.use(express.static(path.resolve(__dirname, "./client/dist")));
+
+// if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+
+  // Serve the frontend for any other route
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+  });
+// }
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "not found" });

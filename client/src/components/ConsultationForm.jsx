@@ -107,7 +107,11 @@ const ConsultationForm = () => {
             {...form.getInputProps("comments")}
             required
           />
-          <Button type="submit" fullWidth>
+          <Button
+            onClick={() => handleSubmit(form.values)}
+            type="submit"
+            fullWidth
+          >
             {t("Submit")}
           </Button>
         </Grid.Col>

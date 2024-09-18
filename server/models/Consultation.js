@@ -14,10 +14,10 @@ const consultation = new Schema(
       type: Date,
       required: [true, "Please provide name"],
     },
-    time: {
-      type: String,
-      required: [true, "Please provide name"],
-    },
+    // time: {
+    //   type: String,
+    //   required: [true, "Please provide name"],
+    // },
     consultationInterest: {
       type: String,
       required: [true, "Please provide name"],

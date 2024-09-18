@@ -8,6 +8,8 @@ import {
   rem,
   Footer,
   Text,
+  Avatar,
+  useMantineTheme,
 } from "@mantine/core";
 import {
   IconBellRinging,
@@ -25,9 +27,13 @@ import {
 import { Link, NavLink } from "react-router-dom";
 
 import styled from "@emotion/styled";
-import { useMantineTheme } from "@mantine/core";
+
 import Logo from "./Logo";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "./AuthProvider";
+import { isUserAdmin } from "../utils/utils";
+import { IconChevronRight } from "@tabler/icons-react/dist/esm/tabler-icons-react";
+import { useNavigate } from "react-router-dom";
 const StyledComponent = styled.nav`
   ${({ theme }) => `
 
@@ -80,16 +86,25 @@ const StyledComponent = styled.nav`
   `}
 `;
 
-const data = [
-  { name: "Quotes", to: "/dashboard", icon: IconReceipt2 },
-  { name: "Consultations", to: "consultations", icon: IconCalendarStats },
-  { name: "Messages", to: "messages", icon: IconAddressBook },
-];
-
 export default function Sidebar({ close = () => null }) {
-  const [active, setActive] = useState(data[0].to);
   const theme = useMantineTheme();
-  const {t}=useTranslation()
+  const { t } = useTranslation();
+  const isAdmin = isUserAdmin();
+  const { user } = useAuth();
+  const nav=useNavigate()
+  const data = isAdmin
+    ? [
+        { name: "Quotes", to: "/dashboard", icon: IconReceipt2 },
+        { name: "Consultations", to: "consultations", icon: IconCalendarStats },
+        { name: "Messages", to: "messages", icon: IconAddressBook },
+      ]
+    : [
+        { name: "Quotes", to: "/dashboard", icon: IconReceipt2 },
+        { name: "Consultations", to: "consultations", icon: IconCalendarStats },
+      ];
+
+  const [active, setActive] = useState(data[0].to);
+
   const links = data.map((item) => (
     <NavLink
       className={"link"}
@@ -107,8 +122,47 @@ export default function Sidebar({ close = () => null }) {
   ));
 
   return (
-    <StyledComponent theme={theme} className="navbar">
-      {links}
-    </StyledComponent>
+    <Box
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      <StyledComponent theme={theme} className="navbar">
+        {links}
+      </StyledComponent>
+      <UnstyledButton
+      onClick={()=>nav('profile')}
+      py='md'
+        sx={(theme) => ({
+          "&:hover": {
+            backgroundColor: theme.colors.gray[0],
+          },
+        })}
+      >
+        <Group>
+          <Avatar
+            radius="xl"
+          />
+
+          <div style={{ flex: 1 }}>
+            <Text size="sm" fw={500}>
+             {`${user?.firstName} ${user?.lastName}`}
+            </Text>
+
+            <Text c="dimmed" size="xs">
+            {`${user?.email}`}
+            </Text>
+          </div>
+
+          <IconChevronRight
+            style={{ width: rem(14), height: rem(14) }}
+            stroke={1.5}
+          />
+        </Group>
+      </UnstyledButton>
+    </Box>
   );
 }
