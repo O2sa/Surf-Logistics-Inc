@@ -46,6 +46,7 @@ import {
   isUserAdmin,
   tableLocale,
 } from "../utils/utils";
+import { exportPdf } from "../utils/dataExport";
 
 const statesColors = {
   approved: "green",
@@ -119,7 +120,7 @@ export default function Consultations({}) {
         },
         enableEditing: false,
         header: t("Appointment Date"),
-                    enableClickToCopy: true,
+        enableClickToCopy: true,
       },
       {
         accessorKey: "comments",
@@ -261,29 +262,34 @@ export default function Consultations({}) {
       onClose: () => setNewRowData({}),
     },
 
-    // renderTopToolbarCustomActions: ({ table }) => (
-    //   <Flex gap={"sm"} wrap={"wrap"}>
-    //     <ExportDataComponent
-    //       disable={table.getPrePaginationRowModel().rows.length === 0}
-    //       header={columns}
-    //       body={table.getPrePaginationRowModel().rows.map((val, idx) => {
-    //         const data = val?.original;
-    //         const permissions = Object.keys(data?.permissions || {})
-    //           .filter((val) => !data?.permissions[val])
-    //           .map((val) => permissions_ar[val])
-    //           .join(" - ");
+    renderTopToolbarCustomActions: ({ table }) => (
+      <Flex gap={"sm"} wrap={"wrap"}>
+        <Button
+          style={{ display: isAdmin ? "block" : "none" }}
+          disable={table.getPrePaginationRowModel().rows.length === 0}
+          onClick={() =>
+            exportPdf(
+              [t("#"), t("User"), t("Info"), t("Comments")],
+              table.getPrePaginationRowModel().rows.map((row, idx) => {
+                const data = row?.original;
+                const user = `${data?.user["firstName"]} ${data?.user["lastName"]} \n${data?.user["email"]}`;
 
-    //         return [
-    //           `${idx + 1}`,
-    //           data.name,
-    //           data.email,
-    //           data?.school?.name || "غير محدد",
-    //           permissions,
-    //         ].reverse();
-    //       })}
-    //     />
-    //   </Flex>
-    // ),
+                const info = `${t("Created at:")} ${data["createdAt"]} \n${t(
+                  "State:"
+                )} ${t(data["state"])}\n${t("Consultation Interest:")} ${t(
+                  data["consultationInterest"]
+                )}\n${t("Appointment Date:")} ${t(data["date"])}`;
+                const comments = data?.comments;
+
+                return [`${idx + 1}`, user, info, comments];
+              })
+            )
+          }
+        >
+          {t("Export as PDF")}
+        </Button>
+      </Flex>
+    ),
 
     state: {
       isLoading: isLoading,

@@ -21,18 +21,20 @@ import { getNotfication } from "../utils/notfications";
 import { t } from "i18next";
 
 export default function Profile({}) {
-  const { user } = useAuth();
+  const { user,logout } = useAuth();
 
   const updateProfile = useCrudOperations(
     ["current-user"],
     [`current-user`],
-    "update"
+    "update",
+    false
   );
 
   const updatePassword = useCrudOperations(
     ["current-user"],
-    [`current-user/change-pass`],
-    "update"
+    [`current-user/update-password`],
+    "update",
+    false
   );
 
   const form = useForm({
@@ -69,13 +71,13 @@ export default function Profile({}) {
 
   // console.log(form.values)
   const handleSubmit = async (values) => {
-    await updateProfile.mutateAsync(values);
+    await updateProfile.mutateAsync(values,false);
     getNotfication(true, "Personal information has been modified!");
   };
 
   const passhandleSubmit = async (values) => {
     // console.log(values)
-    await updatePassword.mutateAsync(values);
+    await updatePassword.mutateAsync(values, false);
     logout();
     getNotfication(true, "Password has been successfully modified!");
   };
@@ -122,8 +124,7 @@ export default function Profile({}) {
                     placeholder={t("Last Name")}
                     {...form.getInputProps("lastName")}
                     withAsterisk
-                    mb={'md'}
-                    
+                    mb={"md"}
                   />
                   <TextInput
                     size="md"

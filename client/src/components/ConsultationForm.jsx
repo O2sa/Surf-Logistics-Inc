@@ -66,7 +66,7 @@ const ConsultationForm = () => {
       });
       getNotfication(
         true,
-        t('"Your free quote request has been sent successfully."')
+        t('Your free quote request has been sent successfully.')
       );
       navigate("/dashboard/consultations");
     } catch (error) {

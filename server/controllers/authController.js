@@ -50,13 +50,13 @@ export const isAuthenticated = async (req, res, next) => {
 export const login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email }).select("password");
 
-  console.log("user", user);
-  console.log("body", req.body);
+  // console.log("user", user);
+  // console.log("body", req.body);
 
   const isValidUser =
     user && (await comparePassword(req.body.password, user.password));
 
-  if (!isValidUser) throw new UnauthenticatedError("البيانات غير صحيحة!");
+  if (!isValidUser) throw new UnauthenticatedError("Invalid data!");
 
   const token = createJWT({ userId: user._id });
 

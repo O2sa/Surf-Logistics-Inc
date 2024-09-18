@@ -19,6 +19,7 @@ import Sidebar from "../components/Sidebar";
 import Logo from "../components/Logo";
 import { IconLogout } from "@tabler/icons-react";
 import { useAuth } from "../components/AuthProvider";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export default function DashboardLayout() {
   const theme = useMantineTheme();
@@ -68,14 +69,14 @@ export default function DashboardLayout() {
                 />
               </MediaQuery>{" "}
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-              <Box w={48} my={"xs"}>
-                <Logo />
-              </Box>
+                <Box w={48} my={"xs"}>
+                  <Logo />
+                </Box>
               </MediaQuery>
-        
             </Group>
 
             <Group>
+              <LanguageSwitcher color={'brand'}/>
               <ActionIcon onClick={() => logout()}>
                 <IconLogout stroke={1.5} />
               </ActionIcon>{" "}

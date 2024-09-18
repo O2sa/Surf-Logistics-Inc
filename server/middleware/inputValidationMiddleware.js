@@ -132,6 +132,3 @@ export const validateQuoteInput = withValidationErrors([
     }),
 ]);
 
-export const validateNameInput = withValidationErrors([
-  body("name").notEmpty().withMessage(getInvalideMsg("الأسم")),
-]);

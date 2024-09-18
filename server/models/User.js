@@ -5,18 +5,18 @@ const UserSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "Please provide name"],
+      required: [true, "Please provide firstName"],
     },
     lastName: {
       type: String,
-      required: [true, "Please provide name"],
+      required: [true, "Please provide lastName"],
     },
     company: {
       type: String,
     },
     phone: {
       type: String,
-      required: [true, "Please provide name"],
+      required: [true, "Please provide phone"],
     },
     email: {
       type: String,

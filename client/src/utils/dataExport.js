@@ -14,12 +14,11 @@ export function exportPdf(head = {}, body = {}, title = "table") {
   // Add text to the PDF
   const doc = new jsPDF();
 
-
   doc.autoTable({
     // useCss: true,
     // startY: 45, // Adjust start position to avoid overlap with the title
     head: [head],
-    margin: { top: 50, bottom: 40 }, // Ensure the table doesn't overlap with the header or footer
+    // margin: { top: 50, bottom: 40 }, // Ensure the table doesn't overlap with the header or footer
     body: body,
     styles: {
       fontSize: 12,
@@ -33,7 +32,7 @@ export function exportPdf(head = {}, body = {}, title = "table") {
     bodyStyles: {
       // halign: 'right',
     },
-    // columnStyles: { 0: { halign: 'right', fillColor: [0, 255, 0] } }, // Cells in first column centered and green
+    columnStyles: { 0: { cellWidth: 12, } }, // Cells in first column centered and green
     // didDrawPage: function (data) {
     //   doc.text(title, pageMiddle + 36, 35, {
     //     align: "right",

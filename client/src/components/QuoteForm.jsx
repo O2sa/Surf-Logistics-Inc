@@ -78,7 +78,7 @@ const QuoteForm = () => {
       });
       getNotfication(
         true,
-        t('"Your free consultation request has been sent successfully."')
+        t('Your free consultation request has been sent successfully.')
       );
       navigate("/dashboard");
     } catch (error) {

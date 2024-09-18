@@ -3,24 +3,20 @@ import React, { createContext, Suspense, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // import Hero from "./pages/Hero";
-const Hero = React.lazy(() => import("./pages/Hero"));
-const Cards = React.lazy(() => import("./pages/Cards"));
-const Pages = React.lazy(() => import("./pages/Pages"));
-const Page = React.lazy(() => import("./pages/Page"));
-const AboutContent = React.lazy(() => import("./components/AboutContent"));
-const Services = React.lazy(() => import("./components/Services"));
-const ConsultationAndQuote = React.lazy(() =>
-  import("./components/ConsultationAndQuote")
-);
-const QuotePage = React.lazy(() => import("./components/QuoteForm"));
-const ReachPage = React.lazy(() => import("./components/Reach"));
-const Dash = React.lazy(() => import("./pages/DashboardLayout"));
-const Login = React.lazy(() => import("./pages/Login"));
-const Register = React.lazy(() => import("./pages/Register"));
-// const Quotes = React.lazy(() => import("./pages/Quotes"));
-// const Messages = React.lazy(() => import("./pages/Messages"));
-// const Consultations = React.lazy(() => import("./pages/Consultations"));
-const Profile = React.lazy(() => import("./pages/Profile"));
+import Hero from "./pages/Hero";
+import Cards from "./pages/Cards";
+import Pages from "./pages/Pages";
+import Page from "./pages/Page";
+import AboutContent from "./components/AboutContent";
+import Services from "./components/Services";
+import ConsultationAndQuote from "./components/ConsultationAndQuote";
+import QuotePage from "./components/QuoteForm";
+import ReachPage from "./components/Reach";
+import Dash from "./pages/DashboardLayout";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+import Profile from './pages/Profile'
 import Quotes from './pages/Quotes'
 import Consultations from "./pages/Consultations";
 import Messages from "./pages/Messages";

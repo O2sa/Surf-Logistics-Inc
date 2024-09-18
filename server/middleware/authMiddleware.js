@@ -11,7 +11,7 @@ import url from "url";
 export const authenticateUser = async (req, res, next) => {
   const { token } = req.cookies;
 
-  if (!token) throw new UnauthenticatedError("غير مخول لك الدخول!");
+  if (!token) throw new UnauthenticatedError("Unauthenticated user!");
 
   try {
     const { userId } = verifyJWT(token);
@@ -26,7 +26,7 @@ export const authenticateUser = async (req, res, next) => {
 
     next();
   } catch (error) {
-    throw new UnauthenticatedError("غير مخول لك الدخول!");
+    throw new UnauthenticatedError("Unauthenticated user!");
   }
 };
 

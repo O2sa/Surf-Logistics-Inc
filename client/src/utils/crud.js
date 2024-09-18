@@ -3,7 +3,12 @@ import customFetch from "./customFetch";
 import { getNotfication } from "./notfications";
 import { useAppContext } from "../App";
 
-export function useCrudOperations(query, route, opt = "update") {
+export function useCrudOperations(
+  query,
+  route,
+  opt = "update",
+  includeId = true
+) {
   const { queryClient } = useAppContext();
   return useMutation({
     mutationFn: async (element) => {
@@ -11,7 +16,7 @@ export function useCrudOperations(query, route, opt = "update") {
       const response =
         opt == "update"
           ? await customFetch.patch(
-              `${route.join("/")}/${element._id}`,
+              `${route.join("/")}/${includeId ? element._id : ""}`,
               element
             )
           : opt == "create"
@@ -32,7 +37,7 @@ export function useGetElements({ query, params = {}, fetchOptions = {} }) {
     queryKey: [...query, params],
     queryFn: async ({ queryKey }) => {
       const { data } = await customFetch.get(`${query.join("/")}`, { params }); // Adjust this URL as per your API route
-      console.log("all geten elements:", data);
+      // console.log("all geten elements:", data);
       return data;
     },
     refetchOnWindowFocus: false,

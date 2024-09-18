@@ -50,7 +50,7 @@ const Reach = () => {
       await customFetch.post("/current-user/add-reach",values);
       getNotfication(
         true,
-        t('"Your message has been sent successfully."')
+        t('Your message has been sent successfully.')
       );
       nav("/");
     } catch (error) {

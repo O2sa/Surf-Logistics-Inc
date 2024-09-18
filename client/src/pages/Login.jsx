@@ -32,6 +32,7 @@ import { useAuth } from "../components/AuthProvider";
 import Logo from "../components/Logo";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "../App";
+import { isEmail } from "@mantine/form";
 const Login = ({}) => {
   const location = useLocation();
   const { queryClient } = useAppContext();
@@ -44,12 +45,11 @@ const Login = ({}) => {
       password: "",
     },
     validate: {
-      email: isNotEmpty(),
-      password: isNotEmpty(),
+      email: isEmail(t('Enter your email')),
+      password: isNotEmpty(t('Enter your Password')),
     },
   });
   const from = location.state?.from?.pathname || "/dashboard";
-  console.log("form", from);
 
   // console.log(form.values)
 
@@ -59,7 +59,7 @@ const Login = ({}) => {
       queryClient.invalidateQueries("auth/isAuthenticated");
 
       navigate(from, { replace: true });
-      getNotfication(true, "You are logged in!");
+      getNotfication(true, t("You are logged in!"));
     } catch (error) {
       console.log(error);
       getNotfication(false, error?.response?.data?.msg);

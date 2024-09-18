@@ -338,27 +338,54 @@ export default function Quote({}) {
     renderTopToolbarCustomActions: ({ table }) => (
       <Flex gap={"sm"} wrap={"wrap"}>
         <Button
+          style={{ display: isAdmin ? "block" : "none" }}
           disable={table.getPrePaginationRowModel().rows.length === 0}
           onClick={() =>
             exportPdf(
-              columns.splice(3).map((val) => t(val.header)),
+              [
+                t("#"),
+                t("User"),
+                t("Info"),
+                t("Pickup and Delivery"),
+                t("Price"),
+              ],
               table.getPrePaginationRowModel().rows.map((row, idx) => {
                 const data = row?.original;
+                const divider = "\n --------------\n";
+
                 const user = `${data?.user["firstName"]} ${data?.user["lastName"]} \n${data?.user["email"]}`;
-                const pickup = `${data["pickupDate"]} ${data["pickupPostalCode"]}`;
-                const delivery = `${data["pickupDate"]} ${data["pickupPostalCode"]}`;
-                const services = `${t("Pickup Services")} ${t(
+                const pickup = `${t(
+                  "Pickup Location:"
+                )}\n${convertUtcDateToLocal(data["pickupDate"])}\n${
+                  data["pickupPostalCode"]
+                }\n`;
+                const delivery = `${t(
+                  "Delivery Location:"
+                )}\n${convertUtcDateToLocal(data["deliveryDate"])}\n${
+                  data["deliveryPostalCode"]
+                }\n`;
+                const itemDes = items
+                  .map((val) => `${t(val)}: ${data[val]}\n`)
+                  .join("");
+                const pickupServs = `${t("Pickup Services:")}\n${t(
+                  data["pickupServices"]
+                )}\n`;
+                const deliveryServs = `${t("Delivery Services:")}\n${t(
                   data["deliveryServices"]
-                )} \n${t("Pickup Services")} ${t(data["pickupServices"])}`;
-                const itemDes = items.map((val) => `${t(val)}: \n${data[val]}`);
+                )}\n`;
+
+                const info = `${itemDes}${divider}${t("Shipping Option:")} ${t(
+                  data["shippingOption"]
+                )}`;
+                const pickupANdDelivery = `Pickup\n\n${pickupServs}\n${pickup}${divider}Delivery\n\n${deliveryServs}\n${delivery}`;
 
                 return [
                   `${idx + 1}`,
                   user,
+                  info,
+                  pickupANdDelivery,
                   formatCurrency(data?.price || 0),
-                  convertUtcDateToLocal(data?.createdAt ?? ""),
-                  data['shippingOption'],
-                  services,
+
                   // itemDes,
                   // delivery,
                   // pickup,

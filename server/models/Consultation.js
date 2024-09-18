@@ -12,7 +12,7 @@ const consultation = new Schema(
     },
     date: {
       type: Date,
-      required: [true, "Please provide name"],
+      required: [true, "Please provide date"],
     },
     // time: {
     //   type: String,
@@ -20,7 +20,7 @@ const consultation = new Schema(
     // },
     consultationInterest: {
       type: String,
-      required: [true, "Please provide name"],
+      required: [true, "Please provide consultationInterest"],
     },
     state: {
       type: String,

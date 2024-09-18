@@ -23,12 +23,13 @@ export const updateUser = async (req, res) => {
 };
 
 export const changePss = async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id).select('password')
+  console.log(req.body)
   const isValidUser =
     user &&
     (await comparePassword(req.body.oldPassword, user.password)) &&
     req.body.password === req.body.confirmPassword;
-  if (!isValidUser) throw new UnauthenticatedError("البيانات غير صحيحة!");
+  if (!isValidUser) throw new UnauthenticatedError("Invalid Data!");
   const hashedPassword = await hashPassword(req.body.password);
 
   await User.findByIdAndUpdate(user._id, { password: hashedPassword });

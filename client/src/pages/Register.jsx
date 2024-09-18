@@ -45,11 +45,10 @@ export default function Register() {
     },
 
     validate: {
-      firstName: (value) =>
-        value.length < 2 ? "Name must have at least 2 letters" : null,
-      lastName: (value) =>
-        value.length < 2 ? "Name must have at least 2 letters" : null,
-      email: isEmail(),
+      firstName:hasLength({ min: 2}, t("Name must have at least 2 letters")),
+      lastName:hasLength({ min: 2}, t("Name must have at least 2 letters")),
+ 
+      email: isEmail(t('Enter your email')),
       phone: (number) => {
         try {
           // Parse the phone number
@@ -75,7 +74,7 @@ export default function Register() {
   const handleSubmit = async (values) => {
     try {
       await customFetch.post("/auth/register", values);
-      getNotfication(true, "Account creation completed successfully!")
+      getNotfication(true, t("Account creation completed successfully!"))
       navigate(from, { replace: true });
 
     } catch (error) {
@@ -110,7 +109,6 @@ export default function Register() {
             required
             mb={"md"}
           />
-
           <Text>
           {t("Phone number")}
           </Text>
@@ -145,7 +143,7 @@ export default function Register() {
           />{" "}
           <Button
             type="submit"
-            onClick={() => handleSubmit(form.values)}
+            // onClick={() => handleSubmit(form.values)}
             fullWidth
             mt="xl"
             size="md"
