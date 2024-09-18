@@ -89,7 +89,7 @@ app.use(cookieParser());
 // app.use(limiter);
 app.use(express.json());
 app.use(mongoSanitize());
-app.get("/", (req, res) => {
+app.get("/api/v1/test", (req, res) => {
   res.send("system up!");
 });
 
