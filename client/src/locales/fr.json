@@ -70,6 +70,8 @@
     "Messages": "Messages",
     "Name": "Nom",
     "Name must have at least 2 letters": "Le nom doit comporter au moins 2 lettres",
+    "Need a freight solution that is efficient and budget friendly? Get a quick, hassle-free quote and discover how we can simplify your shipping and keep you ahead of the game.": "Besoin d'une solution de transport efficace et économique ? Obtenez un devis rapide et sans tracas et découvrez comment nous pouvons simplifier votre expédition et vous permettre de garder une longueur d'avance.",
+    "Need cargo vans, straight trucks, or refrigerated rigs? We have got you covered.": "Besoin de fourgons, de camions porteurs ou de camions réfrigérés ? Nous avons ce qu'il vous faut.",
     "Need cargo vans, straight trucks, or refrigerated rigs? We’ve got you covered.": "Besoin de fourgons, de camions droits ou de camions réfrigérés ? Nous avons ce qu'il vous faut.",
     "New password": "Nouveau mot de passe",
     "old password": "ancien mot de passe",
@@ -113,6 +115,7 @@
     "Tell us about your project": "Parlez-nous de votre projet",
     "Temperature Controlled": "Température contrôlée",
     "to explore exciting business opportunities with us.": "pour explorer des opportunités commerciales passionnantes avec nous.",
+    "Unlock your logistics potential! Our savvy consultants dive deep into your operations. Whether it is express, parcel, or trucking, we will find growth hacks and boost your game. No pressure, just powerful insights.": "Libérez votre potentiel logistique ! Nos consultants expérimentés se plongent au cœur de vos opérations. Qu'il s'agisse de transport express, de colis ou de camionnage, nous trouverons des astuces de croissance et boosterons votre activité. Aucune pression, juste des informations précieuses.",
     "User": "Utilisateur",
     "UTC": "UTC",
     "We are your go-to for B2B transport across North America, offering everything from cargo vans to tractor trailers.": "Nous sommes votre partenaire pour le transport B2B en Amérique du Nord, offrant tout, des fourgons aux semi-remorques.",
@@ -123,5 +126,14 @@
     "with the answers you need.": "avec les réponses dont vous avez besoin.",
     "You are logged in!": "Vous êtes connecté !",
     "Your email": "Votre e-mail",
-    "Your name": "Votre nom"
+    "Your name": "Votre nom",
+    "seo": {
+        "title": "Surf Logistique Inc",
+        "description": "Surf Logistique Inc. offre des services de transport de fret B2B rapides, flexibles et fiables en Amérique du Nord. Pas de contrats à long terme, juste une logistique fluide.",
+        "keywords": "Transport de fret B2B, logistique, transport, expédition, Amérique du Nord, transport flexible",
+        "ogTitle": "Surf Logistique Inc. | Transport de fret B2B",
+        "ogDescription": "Transport de fret B2B rapide et fiable en Amérique du Nord.",
+        "twitterTitle": "Surf Logistique Inc. | Transport de fret B2B",
+        "twitterDescription": "Services de transport fiables et rapides en Amérique du Nord."
+    }
 }

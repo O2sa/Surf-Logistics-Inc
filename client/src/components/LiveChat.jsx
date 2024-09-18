@@ -48,7 +48,7 @@ function LiveChat() {
   }, []);
 
   if (window.Tawk_API) {
-    console.log("Tawk.to widget hidden on load");
+    // console.log("Tawk.to widget hidden on load");
     window.Tawk_API.hideWidget(); // Hide the widget once it has loaded
   }
 

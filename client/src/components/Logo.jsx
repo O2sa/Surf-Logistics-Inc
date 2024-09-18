@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Logo = ({ header = false }) => {
   const nav = useNavigate();
-  const source = header ? "/assets/light_logo.png" : "/assets/logo.svg";
+  const source = header ? "/assets/light_logo.png" : "/assets/logo_about.svg";
   return (
     <Image
       sx={{

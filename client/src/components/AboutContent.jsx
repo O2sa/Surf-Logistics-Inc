@@ -34,7 +34,7 @@ const AboutContent = () => {
         />
         <Text mb={"md"}>
           {t(
-            "About Surf Logistics Inc. Where Freight Meets Finesse We’re your go-to for B2B transport across North America, offering everything from cargo vans to tractor trailers."
+            "We’re your go-to for B2B transport across North America, offering everything from cargo vans to tractor trailers."
           )}
         </Text>
         <Text>

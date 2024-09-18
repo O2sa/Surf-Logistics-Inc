@@ -9,7 +9,7 @@ function FooterMenu({ title = "", links = [] }) {
     <Link
       style={{
         display: "block",
-        textDecoration: "none",
+        // textDecoration: "none",
 
         "&:hover": {
           textDecoration: "underline !important",
@@ -28,7 +28,9 @@ function FooterMenu({ title = "", links = [] }) {
         {t(link.label)}
       </Text>
 
-      
+      {/* <Anchor onClick={handleGoToRegister}>
+          <Text color="brand">{t("Create an account")}</Text>
+        </Anchor> */}
     </Link>
   ));
 
