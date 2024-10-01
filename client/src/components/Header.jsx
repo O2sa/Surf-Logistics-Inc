@@ -14,13 +14,20 @@ export function Header() {
           justifyContent: "space-between",
           alignItems: "center",
         }}
-        size="md"
-        py={"md"}
-        className={classes.inner}
-      >
-        <Box w={48}>
-        <Logo header={true} />
 
+        // className={classes.inner}
+      >
+        <Box
+          sx={(theme) => ({
+            [theme.fn.largerThan("md")]: {
+              width: "100px",
+            },
+            [theme.fn.smallerThan("md")]: {
+              width: "84px",
+            },
+          })}
+        >
+          <Logo header={true} />
         </Box>
         <HeaderMenu />
       </Box>

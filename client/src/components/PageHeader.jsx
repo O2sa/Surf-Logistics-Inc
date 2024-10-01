@@ -10,20 +10,29 @@ function PageHeader({ color, title }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "40vh",
-        [theme.fn.smallerThan("sm")]: {
-          height: "40vh",
-        },
-        [theme.fn.largerThan("md")]: {
-          height: "30vh",
-        },
+        height: "340px",
+        // [theme.fn.smallerThan("sm")]: {
+        //   height: "40vh",
+        // },
+        // [theme.fn.largerThan("md")]: {
+        //   height: "30vh",
+        // },
+
+  
       })}
     >
       <Title
         ta={"center"}
         c={"white"}
-        order={2}
-        style={{ borderBottom: "4px solid white" }}
+        sx={(theme) => ({
+   
+          [theme.fn.smallerThan("md")]: {
+            fontSize: "28px",
+          },
+          [theme.fn.largerThan("md")]: {
+            fontSize: "40px",
+          },
+        })}        style={{ borderBottom: "4px solid white" }}
       >
         {t(title)}
       </Title>

@@ -29,48 +29,71 @@ const data = [
   {
     title: "Reach Out",
     links: [
-      { label: "+1 (514) 816 1182", link: "#" },
-      { label: "info@surflogistics.ca", link: "#" },
+      { label: "+1 (514) 816 1182", link: "tel:+15148161182",ext:true  },
+      { label: "info@surflogistics.ca", link: "mailto:info@surflogistics.ca",ext:true },
     ],
   },
   {
     title: "Free Consultation & Quote",
     links: [
-      { label: "Book Your Free Consultation", link: "/pages/consultation-quote/consultation" },
-      { label: "Get Your Free Quote",  link: "/pages/consultation-quote/quote" },
-
+      {
+        label: "Book Your Free Consultation",
+        link: "/pages/consultation-quote/consultation",
+      },
+      { label: "Get Your Free Quote", link: "/pages/consultation-quote/quote" },
     ],
   },
 ];
 
 export default function Footer() {
   return (
-    <Box py={"xl"} bg={"brand"}>
+    <Box h={"100%"} style={{ alignContent: "center" }} py={"xl"} bg={"brand"}>
       {" "}
       <Container
         sx={(theme) => ({
           [theme.fn.smallerThan("lg")]: {
             display: "flex",
-            justifyContent:'center',
-            textAlign:'center',
-            alignItems:'center'
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
           },
         })}
+        fluid
+        // size={'xl'}
       >
         <Grid justify="space-between" gap={"xs"}>
           <Grid.Col
             span={12}
             xs={6}
             lg={3}
-            style={{ display: "flex", justifyContent: "center" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignContent: "center",
+            }}
           >
-            <Box w={100}>
-              <Logo />
+            <Box
+              sx={(theme) => ({
+                [theme.fn.largerThan("md")]: {
+                  width: "158px",
+                },
+                [theme.fn.smallerThan("lg")]: {
+                  width: "100px",
+                },
+              })}
+            >
+              <Logo type="footer" />
             </Box>{" "}
           </Grid.Col>
 
           {data.map((val, index) => (
-            <Grid.Col span={12} xs={6} lg={3} key={index}>
+            <Grid.Col
+              span={12}
+              xs={6}
+              lg={3}
+              style={{ alignContent: "center" }}
+              key={index}
+            >
               <FooterMenu title={val.title} links={val.links} />
             </Grid.Col>
           ))}

@@ -1,6 +1,7 @@
 import { Box, Container } from "@mantine/core";
 import PageHeader from "../components/PageHeader";
-import { mainSectionHeight } from "../utils/constants";
+import { layoutStyle, mainSectionHeight } from "../utils/constants";
+import LiveChat from "../components/LiveChat";
 
 function Page({
   color = "brand",
@@ -18,36 +19,42 @@ function Page({
         // justifyContent: "space-between",
         // minHeight: `calc(${mainSectionHeight} + 100vh)`,
       }}
+      bg={contentColor}
+      sx={(theme) => ({
+        // position: "relative",
+        ...layoutStyle(theme),
+      })}
     >
       <PageHeader color={color} title={title} />
       <Box
         bg={contentColor}
         sx={(theme) => ({
-          height: "auto",
-          overflowY: "scroll",
-          [theme.fn.smallerThan("md")]: {
-            height: "auto",
-          },
-          [theme.fn.largerThan("md")]: {
-            height: `calc(${mainSectionHeight}   + 70vh)`,
-          },
+          display: "flex",
+          alignItems: "center",
+          height: `calc(-34px + 100%)`
         })}
-
         // h={"30vh"}
+        my={"xl"}
       >
         <Container
-          style={{
-            // display:'flex',
-            // alignContent:"center",
-            // justifyContent: "space-around",
-            // alignItems: "center",
-          }}
-          size={'lg'}
-          my={"lg"}
+          style={
+            {
+              // display:'flex',
+              // alignContent:"center",
+              // justifyContent: "space-around",
+              // alignItems: "center",
+            }
+          }
+          w={"70rem"}
+          fluid
+          // mb={"lg"}
         >
           {children}
         </Container>
       </Box>
+
+      <LiveChat />
+
     </Box>
   );
 }

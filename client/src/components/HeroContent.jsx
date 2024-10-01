@@ -1,7 +1,14 @@
-import { Box, Container, Text, Title } from "@mantine/core";
+import { Box, Text, Title } from "@mantine/core";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 function HeroContent() {
   const { t } = useTranslation();
+  const videoRef = useRef(null); // Create a reference to the video element
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75; // Slow down the video to 0.75x speed
+    }
+  }, []);
   return (
     <Box
       w={"100%"}
@@ -19,6 +26,7 @@ function HeroContent() {
           width={"100%"}
           autoPlay
           loop
+          ref={videoRef}
           muted
         >
           <source src={"/assets/videos/demo.mov"} type="video/mp4" />
@@ -42,13 +50,39 @@ function HeroContent() {
         w={"100%"}
         px={"md"}
         ta={"center"}
-        style={{ left: "50%", top: "40%", transform: "translateX(-50%)" }}
+        style={{ left: "50%", top: "41%", transform: "translateX(-50%)" }}
       >
-        <Title mb={"md"} c="quote">
+        <Title
+          sx={(theme) => ({
+            [theme.fn.smallerThan("md")]: {
+              fontSize: `40px`,
+            },
+            [theme.fn.largerThan("md")]: {
+              fontSize: `55px`,
+            },
+          })}
+          mb={"md"}
+          c="quote"
+        >
           {t("Where Freight Meets Finesse")}
         </Title>
-        <Box ta={"center"} px={'xl'} style={{display:'flex',justifyContent:'center',}} >
-          <Text c={"white"} maw={'900px'} >
+        <Box
+          ta={"center"}
+          px={"xl"}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Text
+            c={"white"}
+            sx={(theme) => ({
+              [theme.fn.smallerThan("md")]: {
+                fontSize: `16px`,
+              },
+              [theme.fn.largerThan("md")]: {
+                fontSize: `20px`,
+              },
+            })}
+            maw={"900px"}
+          >
             {t(
               `Our mission is to deliver top notch, hassle free logistics solutions that keep your business moving seamlessly. No commitments, no contracts—just straight-up reliable service.`
             )}

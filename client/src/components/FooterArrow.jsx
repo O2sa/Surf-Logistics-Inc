@@ -16,19 +16,24 @@ function FooterArrow({ to = "/", color = "white" }) {
 
         transform: "translateX(-50%)",
       }}
+
     >
       <ActionIcon
         // style={{ position: "absolute" }}
-        size={"xl"}
+        // size={"xl"}
         color="brand"
         onClick={() => nav(to)}
         variant="transparent"
         aria-label="bottom arrow"
+        w={'85px'}
+        h={'42px'}
       >
         <SlArrowDown
           style={{
-            width: "80%",
-            height: "80%",
+            // width: '85px',
+            // height: '42px',
+            width: "100%",
+            height: "100%",
             color: theme.colors[color] ? theme.colors[color][5] : color,
           }}
           stroke={1.5}

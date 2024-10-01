@@ -14,7 +14,7 @@ const LanguageSwitcher = ({ color }) => {
 
   return (
     <Select
-      w={"8rem"}
+      w={"100px"}
       color="white"
       sx={(theme) => ({
         input: {
@@ -28,8 +28,8 @@ const LanguageSwitcher = ({ color }) => {
       })}
       defaultValue={i18n.language}
       data={[
-        { label: "🇺🇸 English", value: "en", flag: "🇺🇸" },
-        { label: "🇫🇷 Français", value: "fr", flag: "🇫🇷" },
+        { label: "English", value: "en", flag: "🇺🇸" },
+        { label: "Français", value: "fr", flag: "🇫🇷" },
       ]}
       onChange={changeLanguage}
     />

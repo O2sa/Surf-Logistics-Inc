@@ -19,11 +19,11 @@ const Paragraph = ({
 
   return (
     <Box m={'auto'}>
-      <Title c={titleColor} order={4}>
+      <Title  c={titleColor} order={4} style={{fontSize:"18px"}}>
         {t(title)}
       </Title>
 
-      <Text maw={'900px'} mb={'md'} c={desColor}>{t(description)}</Text>
+      <Text maw={'900px'} style={{fontSize:"18px"}} mb={'md'} c={desColor}>{t(description)}</Text>
     </Box>
   );
 };

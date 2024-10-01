@@ -37,7 +37,7 @@ const CustomCard = ({ data, isPage = false }) => {
         width: "100%",
         height: "100%",
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: "top center",
         transition: "opacity 0.5s ease-in-out",
         opacity: isPage ? 1 : 0,
         backgroundImage: isPage ? `url(${data?.image})` : "none",
@@ -63,6 +63,12 @@ const CustomCard = ({ data, isPage = false }) => {
       borderBottom: `4px solid white`,
       transition: "color 0.5s ease, border-bottom-color 0.5s ease",
       zIndex: "3",
+      [theme.fn.smallerThan("md")]: {
+        fontSize: "28px",
+      },
+      [theme.fn.largerThan("md")]: {
+        fontSize: "40px",
+      },
     },
   }));
 

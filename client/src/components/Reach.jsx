@@ -70,9 +70,12 @@ const Reach = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          fontSize:'16px',
         }}
         span={12}
         md={6}
+
+        // style={{fontSize:'16px',fontWeight:'600'}}
       >
         <Box>
           <Title c={"brand"} order={5}>

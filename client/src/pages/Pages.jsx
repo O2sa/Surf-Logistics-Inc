@@ -30,25 +30,37 @@ const Pages = () => {
       {" "}
       <Box
         sx={(theme) => ({
-          position: "relative",
+          // position: "relative",
           ...layoutStyle(theme),
         })}
+        px={"md"}
+        pt={"md"}
       >
-        <Box style={{ position: "relative", zIndex: 2 }} mt={"lg"} px={34}>
-          <Header />
-        </Box>
         <Box
           // w={"100%"}
           // py={"md"}
-          pos={"relative"}
-          top={-92}
+          // pos={"relative"}
+          // top={-134}
           // h={"70vh"}
-          px={"md"}
           sx={(theme) => ({
             ...layoutStyle(theme),
           })}
         >
           <Outlet />
+        </Box>
+        <Box
+          px={"1.8rem"}
+          pt={"lg"}
+          style={{
+            position: "absolute",
+            zIndex: 2,
+            top: "12px",
+            right: "0",
+            left: "0",
+            width: "100%",
+          }}
+        >
+          <Header />
         </Box>
       </Box>
       <Box
@@ -56,15 +68,15 @@ const Pages = () => {
           height: "auto",
 
           [theme.fn.largerThan("md")]: {
-            height: `10rem`,
+            height: `250px`,
           },
-          position: "relative",
+     
+          // position: "relative",
           zIndex: 2,
         })}
       >
         <Footer />
       </Box>
-      <LiveChat/>
     </Container>
   );
 };

@@ -1,45 +1,88 @@
-import { Text } from "@mantine/core";
+import { Anchor, Text } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-function FooterMenu({ title = "", links = [] }) {
-  const {t}=useTranslation()
+const LinkComp = ({ ext = false, link, label }) => {
+  const { t } = useTranslation();
 
-  const items = links.map((link, index) => (
-    <Link
+  return ext ? (
+    <Anchor
       style={{
         display: "block",
         textDecoration: "none",
-        textDecorationColor: 'white',
+        textDecorationColor: "white",
 
         "&:hover": {
-          textDecorationColor: 'white !important',
+          textDecorationColor: "white !important",
           textDecoration: "underline !important",
-
         },
       }}
-      to={link.link}
-      key={index}
+      href={link}
+      target={'_blank'}
     >
       <Text
         px={"sm"}
-        fz={"sm"}
+        style={{ fontSize: "16px" }}
         c={"white"}
         // component="a"
         // onClick={(event) => event.preventDefault()}
       >
-        {t(link.label)}
+        {label}
       </Text>
 
       {/* <Anchor onClick={handleGoToRegister}>
-          <Text color="brand">{t("Create an account")}</Text>
-        </Anchor> */}
+      <Text color="brand">{t("Create an account")}</Text>
+    </Anchor> */}
+    </Anchor>
+  ) : (
+    <Link
+      style={{
+        display: "block",
+        textDecoration: "none",
+        textDecorationColor: "white",
+
+        "&:hover": {
+          textDecorationColor: "white !important",
+          textDecoration: "underline !important",
+        },
+      }}
+      to={link}
+    >
+      <Text
+        px={"sm"}
+        style={{ fontSize: "16px" }}
+        c={"white"}
+        // component="a"
+        // onClick={(event) => event.preventDefault()}
+      >
+        {t(label)}
+      </Text>
+
+      {/* <Anchor onClick={handleGoToRegister}>
+      <Text color="brand">{t("Create an account")}</Text>
+    </Anchor> */}
     </Link>
+  );
+};
+function FooterMenu({ title = "", links = [] }) {
+  const { t } = useTranslation();
+
+  const items = links.map((link, index) => (
+    <LinkComp
+      label={link.label}
+      link={link.link}
+      ext={link.ext || false}
+      key={index}
+    />
   ));
 
   return (
-    <div   >
-      <Text pl={'xs'} color="about.3" fz={"lg"} fw={"700"}>
+    <div>
+      <Text
+        pl={"xs"}
+        color="about.3"
+        style={{ fontSize: "16px", fontWeight: "600" }}
+      >
         {t(title)}
       </Text>
       {items}

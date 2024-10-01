@@ -24,8 +24,8 @@ const ConsultationAndQuote = () => {
   const { t } = useTranslation();
   const nav = useNavigate();
   return (
-    <Flex gutter={"lg"} gap={"md"} wrap={"wrap"} justify={"space-around"}>
-      <Box w={"22rem"}>
+    <Flex  gutter={"lg"} gap={"md"} wrap={"wrap"} justify={"space-around"}>
+      <Box maw={"450px"}>
         <Title c={"quote"} order={5}>
           {t("Free Consultation")}
         </Title>
@@ -40,7 +40,7 @@ const ConsultationAndQuote = () => {
           onClick={() => nav("consultation")}
         />
       </Box>{" "}
-      <Box w={"22rem"}>
+      <Box maw={"450px"}>
         <Title c={"quote"} order={5}>
           {t("Free Quote")}
         </Title>

@@ -39,9 +39,10 @@ const Cards = () => {
   return (
     <Grid
       style={{ minHeight: `calc(${mainSectionHeight} + 100vh)`, }}
-      align="stretch"
+      // align="stretch"
       m={"0"}
-      gutter={"sm"}
+      gutter={"5px"}
+      pos={'relative'}
     >
       {!page ? (
         cardsData.map((val, idx) => (

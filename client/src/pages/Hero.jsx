@@ -36,7 +36,7 @@ function Hero() {
       style={{ position: "relative", height: "100vh" }}
     >
       {" "}
-      <Container>
+      <Container fluid p={'xl'}>
         <Header />
       </Container>
       <HeroContent />

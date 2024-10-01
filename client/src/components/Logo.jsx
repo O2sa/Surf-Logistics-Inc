@@ -1,9 +1,14 @@
 import { Image } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
-const Logo = ({ header = false }) => {
+
+const logos={
+  about:"/assets/logo_about.svg",
+  footer:"/assets/logo.svg",
+  header:"/assets/light_logo.png",
+}
+const Logo = ({ type = 'header' }) => {
   const nav = useNavigate();
-  const source = header ? "/assets/light_logo.png" : "/assets/logo_about.svg";
   return (
     <Image
       sx={{
@@ -13,7 +18,7 @@ const Logo = ({ header = false }) => {
       }}
       width={"100%"}
       onClick={() => nav("/")}
-      src={source}
+      src={logos[type]}
       alt="Site Logo"
     />
   );

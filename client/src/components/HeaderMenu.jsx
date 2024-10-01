@@ -1,4 +1,12 @@
-import { Menu, Button, Text, rem, ActionIcon, Group } from "@mantine/core";
+import {
+  Menu,
+  Button,
+  Text,
+  rem,
+  ActionIcon,
+  Group,
+  useMantineTheme,
+} from "@mantine/core";
 import {
   IconSettings,
   IconPhoto,
@@ -11,6 +19,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthProvider";
+import { useMediaQuery } from "@mantine/hooks";
 
 const links = [
   { label: "Home", link: "/" },
@@ -28,11 +37,21 @@ function HeaderMenu() {
   const nav = useNavigate();
   // const { isAuthenticated } = useAuth();
   return (
-    <Group>
- 
-
-      <ActionIcon color="brand" onClick={() => nav("/dashboard")}>
-        <IconUserSquare color="white"/>
+    <Group spacing={"xs"}>
+      <ActionIcon
+      size={'34px'}
+        color="brand"
+        // sx={(theme) => ({
+        //   [theme.fn.largerThan("md")]: {
+        //     width: "49px",
+        //   },
+        //   [theme.fn.smallerThan("md")]: {
+        //     width: "34px",
+        //   },
+        // })}
+        onClick={() => nav("/dashboard")}
+      >
+        <IconUserSquare size={"49px"} color="white" />
       </ActionIcon>
       <LanguageSwitcher />
 
@@ -44,13 +63,14 @@ function HeaderMenu() {
 function Links() {
   const nav = useNavigate();
   const { t } = useTranslation();
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <div>
           <ActionIcon
             color="brand"
-            size={"lg"}
+            size={isSmallScreen ? "34px" : "49px"}
             variant="filled"
             aria-label="Settings"
           >
@@ -59,7 +79,7 @@ function Links() {
         </div>
       </Menu.Target>
 
-      <Menu.Dropdown sx={{ position: "absolute", }}>
+      <Menu.Dropdown sx={{ position: "absolute" }}>
         {links.map((val, idx) => (
           <Menu.Item onClick={() => nav(val.link)} key={idx}>
             {t(val.label)}
