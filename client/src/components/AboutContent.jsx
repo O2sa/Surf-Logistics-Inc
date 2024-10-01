@@ -20,20 +20,28 @@ const AboutContent = () => {
   const { t } = useTranslation();
 
   return (
-    <Grid>
-      <Grid.Col span={12} md={3} display={"flex"}>
+    <Grid
+      sx={(theme) => ({
+
+        [theme.fn.smallerThan("md")]: {
+          textAlign:'center'
+        },
+
+   
+      })}
+    >
+      <Grid.Col span={12} md={3} display={"flex"} style={{justifyContent:'center'}}>
         <Box w={"179px"} style={{ alignContent: "center" }}>
           <Logo type="about" />
         </Box>
         <Divider
           orientation="vertical"
           sx={(theme) => ({
-         
             [theme.fn.smallerThan("md")]: {
               display: "none",
             },
 
-            borderColor: "#294A63" 
+            borderColor: "#294A63",
           })}
           size={"1px"}
           color={"#294A63"}

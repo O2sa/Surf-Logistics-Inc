@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Box, Container } from "@mantine/core";
 import { useMediaQuery, useViewportSize } from "@mantine/hooks";
 import LiveChat from "../components/LiveChat";
@@ -10,6 +10,8 @@ import { layoutStyle, mainSectionHeight } from "../utils/constants";
 const Pages = () => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { height } = useViewportSize();
+  const location = useLocation();
+  console.log(location);
   return (
     <Container
       sx={(theme) => ({
@@ -70,13 +72,16 @@ const Pages = () => {
           [theme.fn.largerThan("md")]: {
             height: `250px`,
           },
-     
+
           // position: "relative",
           zIndex: 2,
         })}
       >
         <Footer />
       </Box>
+      {!(location.pathname == "/pages" && location.search == "") && (
+        <LiveChat />
+      )}
     </Container>
   );
 };

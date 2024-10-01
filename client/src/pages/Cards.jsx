@@ -11,25 +11,25 @@ const cardsData = [
     name: "About",
     color: "about",
     to: "about",
-    image: "/assets/images/about.png",
+    image: "/assets/images/about.jpg",
   },
   {
     name: "Services",
     color: "services",
     to: "services",
-    image: "/assets/images/services.png",
+    image: "/assets/images/services.jpg",
   },
   {
     name: "Reach Out",
     color: "reach",
     to: "reach",
-    image: "/assets/images/reach.png",
+    image: "/assets/images/reach.jpg",
   },
   {
     name: "Consultation & Quote",
     color: "quote",
     to: "consultation-quote",
-    image: "/assets/images/quote.png",
+    image: "/assets/images/quote.jpg",
   },
 ];
 

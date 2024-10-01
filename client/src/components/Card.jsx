@@ -37,7 +37,7 @@ const CustomCard = ({ data, isPage = false }) => {
         width: "100%",
         height: "100%",
         backgroundSize: "cover",
-        backgroundPosition: "top center",
+        backgroundPosition: "center",
         transition: "opacity 0.5s ease-in-out",
         opacity: isPage ? 1 : 0,
         backgroundImage: isPage ? `url(${data?.image})` : "none",
@@ -47,7 +47,7 @@ const CustomCard = ({ data, isPage = false }) => {
         backgroundImage: `url(${data?.image})`,
         opacity: 1,
         // zIndex: -1,
-        cursor: "pointer",
+        cursor: !isPage && "pointer",
       },
 
       [`&:hover .${getStylesRef("text")}`]: {
@@ -61,6 +61,8 @@ const CustomCard = ({ data, isPage = false }) => {
       textAlign: "center",
       color: "white",
       borderBottom: `4px solid white`,
+      borderBottomColor: isPage && theme.colors[data?.color][5],
+
       transition: "color 0.5s ease, border-bottom-color 0.5s ease",
       zIndex: "3",
       [theme.fn.smallerThan("md")]: {

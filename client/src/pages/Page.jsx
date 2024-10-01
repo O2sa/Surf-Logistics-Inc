@@ -53,7 +53,6 @@ function Page({
         </Container>
       </Box>
 
-      <LiveChat />
 
     </Box>
   );
