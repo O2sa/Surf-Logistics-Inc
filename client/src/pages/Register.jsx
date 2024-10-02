@@ -86,7 +86,7 @@ export default function Register() {
     <Container size={420} my={40}>
      <Group position="center">
         <Box  w={100}>
-          <Logo />
+          <Logo type={'footer'}/>
         </Box>{" "}
       </Group>
       <Title order={3}  ta="center" mt={5}>

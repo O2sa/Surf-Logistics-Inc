@@ -75,7 +75,7 @@ const Login = ({}) => {
     <Container size={420} my={40}>
       <Group position="center">
         <Box position="center" w={100}>
-          <Logo />
+          <Logo type={'footer'} />
         </Box>{" "}
       </Group>
       <Group mt="md" position="center" sx={{ gap: 0 }}>
