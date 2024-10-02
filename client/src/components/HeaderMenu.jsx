@@ -68,16 +68,15 @@ function Links() {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <div>
           <ActionIcon
             color="brand"
             size={isSmallScreen ? "34px" : "49px"}
             variant="filled"
-            // aria-label="navigator"
+            aria-label="Change Page"
+            name="Burgr"
           >
             <IconMenu2 style={{ width: "70%", height: "70%" }} stroke={1.5} />
           </ActionIcon>
-        </div>
       </Menu.Target>
 
       <Menu.Dropdown sx={{ position: "absolute" }}>

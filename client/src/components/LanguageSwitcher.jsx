@@ -17,6 +17,7 @@ const LanguageSwitcher = ({ color }) => {
       maw={"116px"}
       color="white"
       label={""}
+      aria-label="Select Language" // Provide an accessible name for screen readers
       sx={(theme) => ({
         input: {
           backgroundColor: "transparent",
