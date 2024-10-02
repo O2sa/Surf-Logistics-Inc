@@ -1,4 +1,5 @@
 import {
+  Anchor,
   Box,
   Button,
   Grid,
@@ -24,53 +25,42 @@ import customFetch from "../utils/customFetch";
 
 const Reach = () => {
   const { t } = useTranslation();
-  const nav=useNavigate()
-  const onClick=(route)=>nav(route)
+  const nav = useNavigate();
+  const onClick = (route) => nav(route);
   const form = useForm({
     initialValues: {
       name: "",
       subject: "",
       email: "",
-    
     },
 
     validate: {
       name: isNotEmpty(),
       subject: isNotEmpty(),
-      
+
       email: isEmail(),
-     
     },
   });
-
 
   const handleSubmit = async (values) => {
     console.log("Date in UTC:", values);
     try {
-      await customFetch.post("/current-user/add-reach",values);
-      getNotfication(
-        true,
-        t('Your message has been sent successfully.')
-      );
+      await customFetch.post("/current-user/add-reach", values);
+      getNotfication(true, t("Your message has been sent successfully."));
       nav("/");
     } catch (error) {
       getNotfication(false, error?.response?.data?.msg);
     }
   };
 
-
-
   return (
-    <Grid  justify={"space-around"}>
-
-
-
+    <Grid justify={"space-around"}>
       <Grid.Col
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          fontSize:'16px',
+          fontSize: "16px",
         }}
         span={12}
         md={6}
@@ -82,9 +72,16 @@ const Reach = () => {
             {t("Got Questions?")}
           </Title>
 
-          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"} maw={'300px'}>
+          <Text
+            style={{ lineHeight: "1.2" }}
+            mb={"md"}
+            c={"brand"}
+            maw={"300px"}
+          >
             {`${t("Call us at")} `}
-            <span style={{ color: "white" }}>514-816-1182</span>
+            <Anchor style={{ color: "white" }} href="tel:514-816-1182">
+              514-816-1182
+            </Anchor>
             {` ${t("to explore exciting business opportunities with us.")}`}
           </Text>
         </Box>{" "}
@@ -93,9 +90,19 @@ const Reach = () => {
             {t("Prefer Email?")}
           </Title>
 
-          <Text style={{ lineHeight: "1.2" }} mb={"md"} c={"brand"} maw={'300px'}>
+          <Text
+            style={{ lineHeight: "1.2" }}
+            mb={"md"}
+            c={"brand"}
+            maw={"300px"}
+          >
             {`${t("Shoot us a message at")} `}
-            <span style={{ color: "white" }}>info@surflogistics.ca</span>
+            <Anchor
+              href="mailto:info@surflogistics.ca"
+              style={{ color: "white" }}
+            >
+              info@surflogistics.ca
+            </Anchor>
             {` ${t(
               "and we'll get back to you quickly with the answers you need."
             )}`}
@@ -103,65 +110,64 @@ const Reach = () => {
         </Box>
       </Grid.Col>{" "}
       <Grid.Col span={12} md={6}>
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-
-        <TextInput
-          mb={"md"}
-          sx={(theme) => ({
-            input: {
-              backgroundColor: "transparent",
-              "::placeholder": {
-                color: theme.colors.brand[5],
+        <form onSubmit={form.onSubmit(handleSubmit)}>
+          <TextInput
+            mb={"md"}
+            sx={(theme) => ({
+              input: {
+                backgroundColor: "transparent",
+                "::placeholder": {
+                  color: theme.colors.brand[5],
+                },
+                border: "none",
+                borderBottom: "1px solid white",
+                borderRadius: "0",
               },
-              border: "none",
-              borderBottom: "1px solid white",
-              borderRadius: "0",
-            },
-          })}
-          {...form.getInputProps("name")}
-          required
-          placeholder={t("Your name")}
-        />
-        <TextInput
-          sx={(theme) => ({
-            input: {
-              backgroundColor: "transparent",
-              "::placeholder": {
-                color: theme.colors.brand[5],
+            })}
+            {...form.getInputProps("name")}
+            required
+            placeholder={t("Your name")}
+          />
+          <TextInput
+            sx={(theme) => ({
+              input: {
+                backgroundColor: "transparent",
+                "::placeholder": {
+                  color: theme.colors.brand[5],
+                },
+                border: "none",
+                borderBottom: "1px solid white",
+                borderRadius: "0",
               },
-              border: "none",
-              borderBottom: "1px solid white",
-              borderRadius: "0",
-            },
-          })}
-          required
-          mb={"md"}
-          {...form.getInputProps("email")}
-          placeholder={t("Your email")}
-        />
-        <Textarea
-          autosize
-          minRows={4}
-          maxRows={8}
-          required
-          sx={(theme) => ({
-            textarea: {
-              backgroundColor: "transparent",
-              "::placeholder": {
-                color: theme.colors.brand[5],
+            })}
+            required
+            mb={"md"}
+            {...form.getInputProps("email")}
+            placeholder={t("Your email")}
+          />
+          <Textarea
+            autosize
+            minRows={4}
+            maxRows={8}
+            required
+            sx={(theme) => ({
+              textarea: {
+                backgroundColor: "transparent",
+                "::placeholder": {
+                  color: theme.colors.brand[5],
+                },
+                border: "none",
+                borderBottom: "1px solid white",
+                borderRadius: "0",
               },
-              border: "none",
-              borderBottom: "1px solid white",
-              borderRadius: "0",
-            },
-          })}
-          mb={"md"}
-          {...form.getInputProps("comments")}
-          placeholder={t("Tell us about your project")}
-        />
-        <Box  onClick={()=>handleSubmit(form.values)} ta={"end"}>
-          <ButtonWithArrow  text="Lets do it" />
-        </Box>
+            })}
+            mb={"md"}
+            {...form.getInputProps("comments")}
+            placeholder={t("Tell us about your project")}
+          />
+          <Box onClick={() => handleSubmit(form.values)} ta={"end"}>
+            <ButtonWithArrow text="Lets do it" />
+          </Box>
         </form>
       </Grid.Col>
     </Grid>

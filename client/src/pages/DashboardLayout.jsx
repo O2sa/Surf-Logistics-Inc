@@ -69,8 +69,8 @@ export default function DashboardLayout() {
                 />
               </MediaQuery>{" "}
               <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-                <Box w={48} my={"xs"}>
-                  <Logo />
+                <Box  w={48} my={"xs"}>
+                  <Logo type="about" />
                 </Box>
               </MediaQuery>
             </Group>

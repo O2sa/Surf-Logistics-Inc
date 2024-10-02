@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import { IconMessage } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import TawkToChat from "./TawkWidget";
+import { SlArrowDown } from "react-icons/sl";
 
 function LiveChat() {
   const [opened, { toggle, close }] = useDisclosure(true);
@@ -66,14 +67,14 @@ function LiveChat() {
         position: "fixed",
         bottom: "250px",
         right: "0",
-        marginRight:'1rem',
+        marginRight: "1rem",
         [theme.fn.smallerThan("md")]: {
           bottom: "20px",
         },
         zIndex: "100",
       })}
     >
-      {isSmallScreen ? (
+      {isSmallScreen || !opened ? (
         <ActionIcon
           // style={{ position: "absolute" }}
           bg="#fff"
@@ -105,23 +106,53 @@ function LiveChat() {
           h={"333px"}
         >
           <Box w={"250px"} h={"333px"}>
-            <Text
-              w={"100%"}
-              ta={"center"}
-              c={"white"}
-              py={"md"}
-              bg={"services"}
-              fw={"600"}
-              fz={"18px"}
-              h={"50px"}
-            >
-              {t("Live Chat")}
-            </Text>
+            <Box bg={"services"} pos={"relative"} display={'flex'} >
+              <Text
+                w={"100%"}
+                ta={"center"}
+                c={"white"}
+                py={"md"}
+
+                fw={"600"}
+                fz={"18px"}
+                h={"50px"}
+              >
+                {t("Live Chat")}
+              </Text>
+
+              <ActionIcon
+                pos={"fixed"}
+                // style={{ position: "absolute" }}
+                // size={"xl"}
+                right={"1.3rem"}
+                mt={'12px'}
+                color="#fff"
+                onClick={close}
+                variant="transparent"
+                aria-label="bottom arrow"
+                w={"42px"}
+              >
+                <SlArrowDown
+                  style={{
+                    // width: '85px',
+                    // height: '42px',
+                    width: "80%",
+                    height: "80%",
+                    // color: theme.colors[color]
+                    //   ? theme.colors[color][5]
+                    //   : color,
+                    color:'white'
+                  }}
+                  stroke={1.5}
+                />
+              </ActionIcon>
+            </Box>
 
             <Box px={"sm"}>
-              <Text fw={"600"} fz={"16px"} c="services" my={"sm"}>
-                {t("Have Questions? Chatwith us live")}
+              <Text fw={"600"} fz={"16px"} c="services" my={"sm"} maw={"170px"}>
+                {t("Have Questions? Chat with us live")}
               </Text>
+
               <Text color="white" fz={"16px"}>
                 {t(
                   "Hit the button below to connect with our team in real time and get answers to all your logistics questions. We are ready to assist!"

@@ -33,10 +33,10 @@ function Hero() {
       exit="out"
       variants={pageVariants}
       transition={pageTransition}
-      style={{ position: "relative", height: "100vh" }}
+      style={{ position: "relative", height: "100vh", maxHeight: "100vh" }}
     >
       {" "}
-      <Container fluid p={'xl'}>
+      <Container fluid p={"xl"}>
         <Header />
       </Container>
       <HeroContent />

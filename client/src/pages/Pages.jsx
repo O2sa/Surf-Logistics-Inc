@@ -11,7 +11,6 @@ const Pages = () => {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const { height } = useViewportSize();
   const location = useLocation();
-  console.log(location);
   return (
     <Container
       sx={(theme) => ({

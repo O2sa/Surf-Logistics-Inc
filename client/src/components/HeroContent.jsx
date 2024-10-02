@@ -50,7 +50,17 @@ function HeroContent() {
         w={"100%"}
         px={"md"}
         ta={"center"}
-        style={{ left: "50%", top: "41%", transform: "translateX(-50%)" }}
+        sx={(theme) => ({
+          left: "50%",
+          top: "41%",
+          transform: "translateX(-50%)",
+          [theme.fn.smallerThan("md")]: {
+            top: "38%",
+          },
+          [theme.fn.largerThan("md")]: {
+            top: "41%",
+          },
+        })}
       >
         <Title
           sx={(theme) => ({
