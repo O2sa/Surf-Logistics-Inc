@@ -14,7 +14,7 @@ const LanguageSwitcher = ({ color }) => {
 
   return (
     <Select
-      w={"100px"}
+      maw={"116px"}
       color="white"
       sx={(theme) => ({
         input: {

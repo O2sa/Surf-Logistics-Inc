@@ -35,14 +35,14 @@ import {
   authenticateUser,
   authorizePermissions,
 } from "./middleware/authMiddleware.js";
+import { validateMessageInput } from "./middleware/inputValidationMiddleware.js";
+import { createMessage } from "./controllers/messageController.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -93,6 +93,7 @@ app.get("/api/v1/test", (req, res) => {
   res.send("system up!");
 });
 
+app.post("/api/v1/current-user/add-reach", validateMessageInput, createMessage);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", authenticateUser);
 
@@ -104,21 +105,17 @@ app.use(
   authorizePermissions(["admin"]),
   consultationRouter
 );
-app.use(
-  "/api/v1/messages",
-  authorizePermissions(["admin"]),
-  messageRouter
-);
+app.use("/api/v1/messages", authorizePermissions(["admin"]), messageRouter);
 
 // app.use(express.static(path.resolve(__dirname, "./client/dist")));
 
 // if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  // Serve the frontend for any other route
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
-  });
+// Serve the frontend for any other route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+});
 // }
 
 app.use("*", (req, res) => {

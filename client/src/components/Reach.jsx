@@ -36,14 +36,14 @@ const Reach = () => {
 
     validate: {
       name: isNotEmpty(),
-      subject: isNotEmpty(),
+      subject: isNotEmpty(""),
 
       email: isEmail(),
     },
   });
 
   const handleSubmit = async (values) => {
-    console.log("Date in UTC:", values);
+    // console.log("Date in UTC:", values);
     try {
       await customFetch.post("/current-user/add-reach", values);
       getNotfication(true, t("Your message has been sent successfully."));
@@ -52,6 +52,8 @@ const Reach = () => {
       getNotfication(false, error?.response?.data?.msg);
     }
   };
+
+  const theme = useMantineTheme();
 
   return (
     <Grid justify={"space-around"}>
@@ -165,8 +167,21 @@ const Reach = () => {
             {...form.getInputProps("comments")}
             placeholder={t("Tell us about your project")}
           />
-          <Box onClick={() => handleSubmit(form.values)} ta={"end"}>
-            <ButtonWithArrow text="Lets do it" />
+          <Box ta={'end'}>
+            <Button
+              leftIcon={
+                <IconArrowNarrowRight
+                  style={{ marginRight: "1px" }}
+                  size={32}
+                  color={theme.colors.brand[5]}
+                />
+              }
+              type="submit"
+              variant="subtle"
+         c={'white'}
+            >
+              {t("Lets do it")}
+            </Button>
           </Box>
         </form>
       </Grid.Col>

@@ -142,7 +142,7 @@ export default function Sidebar({ close = () => null }) {
           },
         })}
       >
-        <Group>
+        <Group noWrap style={{overflow:'hidden'}}>
           <Avatar
             radius="xl"
           />

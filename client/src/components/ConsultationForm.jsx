@@ -54,11 +54,12 @@ const ConsultationForm = () => {
           : null,
 
       // Ensure time is picked
-      time: (value) => (value ? null : "Please pick an appointment time"),
+      // time: (value) => (value ? null : "Please pick an appointment time"),
     },
   });
 
   const handleSubmit = async (values) => {
+    console.log("Form values: ", values);  // Add this to debug
     try {
       await customFetch.post("/current-user/add-consultation", {
         ...values,
@@ -107,9 +108,12 @@ const ConsultationForm = () => {
             {...form.getInputProps("comments")}
             required
           />
+
+          
           <Button
-            onClick={() => handleSubmit(form.values)}
+            // onClick={() => handleSubmit(form.values)}
             type="submit"
+            disabled={!form.isValid()}
             fullWidth
           >
             {t("Submit")}
