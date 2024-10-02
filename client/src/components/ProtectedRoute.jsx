@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
         const response = await customFetch.get("/auth/isAuthenticated");
         setIsAuthenticated(response.data.isAuthenticated);
       } catch (error) {
-        console.error("Error checking authentication", error);
+        // console.error("Error checking authentication", error);
         setIsAuthenticated(false); // or handle errors as needed
       }
     };

@@ -1,12 +1,12 @@
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 
 const SEO = () => {
   const { t, i18n } = useTranslation();
-
+  const siteUrl = window.location.origin;
   return (
-    <HelmetProvider>
+    // <HelmetProvider>
       <Helmet>
         {/* English Version */}
 
@@ -30,11 +30,11 @@ const SEO = () => {
         <meta property="og:title" content={t("seo.ogTitle")} />
         <meta property="og:description" content={t("seo.ogDescription")} />
         <meta property="og:type" content="website" />
-        {/* <meta property="og:url" content="https://www.surflogistics.com" />
+        <meta property="og:url" content={siteUrl} />
         <meta
           property="og:image"
-          content="https://example.com/path-to-image.jpg"
-        /> */}
+          content={`${siteUrl}/assets/images/info.png`}
+        />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -45,12 +45,44 @@ const SEO = () => {
         />
         <meta
           name="twitter:image"
-          content="https://example.com/path-to-image.jpg"
+          content={`${siteUrl}/assets/images/info.png`}
         />
 
         <meta name="robots" content="index, follow" />
+        <script type="application/ld+json">
+        {`
+        {
+         "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": {
+          "@language": "en",
+          "@value": "Surf Logistics Inc."
+        },
+        "alternateName": {
+          "@language": "fr",
+          "@value": "Surf Logistique Inc."
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1 (514) 816 1182", 
+          "contactType": "Customer Service",
+          "areaServed": ["US", "CA"],
+          "availableLanguage": ["English", "French"]
+        },
+          "url": ${siteUrl},
+          "logo": ${siteUrl+'/logo.svg'},
+          "sameAs": [
+            "https://www.facebook.com/yourprofile",
+            "https://www.twitter.com/yourprofile",
+            "https://www.linkedin.com/yourprofile"
+          ]
+        }
+        `}
+      </script>
+
+     
       </Helmet>
-    </HelmetProvider>
+    // </HelmetProvider>
   );
 };
 

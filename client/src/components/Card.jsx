@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
-  Card,
-  Text,
   Title,
   createStyles,
   getStylesRef,
@@ -12,12 +10,38 @@ import { useTranslation } from "react-i18next";
 
 const CustomCard = ({ data, isPage = false }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isInView, setIsInView] = useState(false);
+  const cardRef = useRef(null);
+  
   const onChange = (val) => setSearchParams({ page: val });
+
+  // Create an IntersectionObserver to observe when the card enters the viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of the card is visible
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
 
   const useStyles = createStyles((theme) => ({
     card: {
       position: "relative",
-      // width: 300,
       height: "100%",
       display: "flex",
       alignItems: "center",
@@ -28,6 +52,7 @@ const CustomCard = ({ data, isPage = false }) => {
         height: isPage ? "" : "20rem",
       },
       overflow: "hidden",
+
       // Position the overlay image
       "&::before": {
         content: '""',
@@ -40,29 +65,25 @@ const CustomCard = ({ data, isPage = false }) => {
         backgroundPosition: "center",
         transition: "opacity 0.5s ease-in-out",
         opacity: isPage ? 1 : 0,
-        backgroundImage: isPage ? `url(${data?.image})` : "none",
+        backgroundImage: isInView && isPage ? `url(${data?.image})` : "none",
       },
 
       "&:hover::before": {
         backgroundImage: `url(${data?.image})`,
         opacity: 1,
-        // zIndex: -1,
         cursor: !isPage && "pointer",
       },
 
       [`&:hover .${getStylesRef("text")}`]: {
-        // color: theme.colors[data?.color][5],
         borderBottomColor: theme.colors[data?.color][5],
       },
     },
     text: {
       ref: getStylesRef("text"),
-      // fontSize: theme.fontSizes.lg,
       textAlign: "center",
       color: "white",
       borderBottom: `4px solid white`,
       borderBottomColor: isPage && theme.colors[data?.color][5],
-
       transition: "color 0.5s ease, border-bottom-color 0.5s ease",
       zIndex: "3",
       [theme.fn.smallerThan("md")]: {
@@ -76,8 +97,13 @@ const CustomCard = ({ data, isPage = false }) => {
 
   const { t } = useTranslation();
   const { classes } = useStyles();
+
   return (
-    <Box style={{}} onClick={() => onChange(data?.to)} className={classes.card}>
+    <Box
+      ref={cardRef}
+      onClick={() => onChange(data?.to)}
+      className={classes.card}
+    >
       <Title order={3} className={classes.text}>
         {t(data?.name)}
       </Title>

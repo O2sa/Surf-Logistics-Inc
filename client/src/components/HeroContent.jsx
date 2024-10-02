@@ -26,10 +26,12 @@ function HeroContent() {
           width={"100%"}
           autoPlay
           loop
+          aria-label="hero video"
+
           ref={videoRef}
           muted
         >
-          <source src={"/assets/videos/demo.mov"} type="video/mp4" />
+          <source  src={"/assets/videos/demo.mov"} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <Box

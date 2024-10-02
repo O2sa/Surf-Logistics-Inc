@@ -39,7 +39,7 @@ function HeaderMenu() {
   return (
     <Group spacing={"xs"}>
       <ActionIcon
-      size={'34px'}
+        size={"34px"}
         color="brand"
         // sx={(theme) => ({
         //   [theme.fn.largerThan("md")]: {
@@ -49,6 +49,7 @@ function HeaderMenu() {
         //     width: "34px",
         //   },
         // })}
+        aria-label="dashboard"
         onClick={() => nav("/dashboard")}
       >
         <IconUserSquare size={"49px"} color="white" />
@@ -72,7 +73,7 @@ function Links() {
             color="brand"
             size={isSmallScreen ? "34px" : "49px"}
             variant="filled"
-            aria-label="Settings"
+            // aria-label="navigator"
           >
             <IconMenu2 style={{ width: "70%", height: "70%" }} stroke={1.5} />
           </ActionIcon>

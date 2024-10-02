@@ -16,6 +16,7 @@ const LanguageSwitcher = ({ color }) => {
     <Select
       maw={"116px"}
       color="white"
+      label={""}
       sx={(theme) => ({
         input: {
           backgroundColor: "transparent",

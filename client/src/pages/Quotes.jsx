@@ -129,7 +129,7 @@ export default function Quote({}) {
           return (
             <Group>
               {items.map((val) => (
-                <Box noWrap key={val} ta={"center"}>
+                <Box  key={val} ta={"center"}>
                   <Text fz="sm" fw={500}>
                     {`${t(val)}: `}
                   </Text>
@@ -179,7 +179,7 @@ export default function Quote({}) {
           const code = row?.original?.pickupPostalCode;
           const date = convertUtcDateToLocal(row?.original?.pickupDate ?? "");
           return (
-            <Box noWrap spacing={"md"}>
+            <Box  spacing={"md"}>
               <Box ta={"center"} mb={"sm"}>
                 <Text fz="sm" fw={500}>
                   {`${t("postal code")}: `}
@@ -336,10 +336,13 @@ export default function Quote({}) {
     },
 
     renderTopToolbarCustomActions: ({ table }) => (
-      <Flex gap={"sm"} wrap={"wrap"}>
+      <Flex gap={"sm"} >
         <Button
           style={{ display: isAdmin ? "block" : "none" }}
-          disable={table.getPrePaginationRowModel().rows.length === 0}
+          // disable={
+          //   table.getPrePaginationRowModel().rows.length === 0 &&
+          //   table.getPrePaginationRowModel().rows.length
+          // }
           onClick={() =>
             exportPdf(
               [

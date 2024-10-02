@@ -41,6 +41,7 @@ import Loader from "./components/Loader";
 import { AuthProvider } from "./components/AuthProvider";
 import { Notifications } from "@mantine/notifications";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SEO from "./components/SEO";
 export default function App() {
   return (
     <MantineProvider
@@ -223,6 +224,8 @@ export default function App() {
           </AppContext.Provider>
         </QueryClientProvider>
       </AnimatePresence>
+
+
     </MantineProvider>
   );
 }

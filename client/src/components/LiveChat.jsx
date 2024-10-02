@@ -96,7 +96,6 @@ function LiveChat() {
         </ActionIcon>
       ) : (
         <Box
-          opened={opened}
           bg={"about"}
           // withCloseButton
           onClose={close}
