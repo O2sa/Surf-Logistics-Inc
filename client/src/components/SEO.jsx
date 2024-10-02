@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 const SEO = () => {
   const { t, i18n } = useTranslation();
   const siteUrl = window.location.origin;
-  console.log("siteUrl", siteUrl);
   return (
     // <HelmetProvider>
     <Helmet>
