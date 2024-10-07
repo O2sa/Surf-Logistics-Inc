@@ -69,7 +69,7 @@ function Links() {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Menu shadow="md" offset={0} o position="bottom-end" width={200}>
+    <Menu  offset={0} o position="bottom-end" width={200}>
       <Menu.Target>
         <ActionIcon
           color="brand"

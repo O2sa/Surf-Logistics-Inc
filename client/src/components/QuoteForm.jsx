@@ -128,7 +128,7 @@ const QuoteForm = () => {
           />
    
           <Text size={"sm"}>{t("Item Description")}</Text>
-          <Group spacing={2} mb={"sm"}>
+          <Group spacing={2} mb={"sm"} noWrap>
             <NumberInput
               placeholder={t("Quantity")}
               {...form.getInputProps("quantity")}
