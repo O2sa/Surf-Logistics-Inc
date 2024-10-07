@@ -21,6 +21,7 @@ const LanguageSwitcher = ({ color }) => {
   return (
     <Button
       maw={"116px"}
+      c="white"
       variant="subtle"
       aria-label="Select Language" // Provide an accessible name for screen readers
       onClick={() => changeLanguage(i18n.language == "fr" ? "en" : "fr")}
