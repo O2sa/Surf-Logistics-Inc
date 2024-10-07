@@ -39,7 +39,7 @@ function HeaderMenu() {
   const nav = useNavigate();
   // const { isAuthenticated } = useAuth();
   return (
-    <Group spacing={"2px"}>
+    <Group spacing={"xs"}>
       <ActionIcon
         size={"34px"}
         color="brand"
