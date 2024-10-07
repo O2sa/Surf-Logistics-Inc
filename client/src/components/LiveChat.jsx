@@ -12,23 +12,28 @@ import {
   Image,
 } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import { IconMessage } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
 
 function LiveChat() {
   const [opened, { toggle, close }] = useDisclosure(true);
   const theme = useMantineTheme();
-  const { t, i18n } = useTranslation();
-  TawkToChat();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
 
-  const openChat = () => {
-    if (window.Tawk_API) {
-      window.Tawk_API.setAttributes({
-        language: i18n.language, // Set the widget's language dynamically
-      });
-      window.Tawk_API.maximize(); // Opens the Tawk.to chat widget
-    }
+  useEffect(() => {
+    // Initialize the chat widget
+    ChatWidgetController.init(language);
+  }, []);
+
+  const handleShowChat = () => {
+    ChatWidgetController.showChat();
+  };
+
+  const handleHideChat = () => {
+    ChatWidgetController.hideChat();
   };
 
   const isSmallScreen = useMediaQuery("(max-width: 1200px)");
@@ -39,8 +44,14 @@ function LiveChat() {
         position: "fixed",
         bottom: "250px",
         right: "0",
-        marginRight: "1rem",
-        [theme.fn.smallerThan("md")]: {
+
+        marginRight: "20px",
+
+        [theme.fn.largerThan("md")]: {
+          marginRight: "50px",
+        },
+
+        [theme.fn.smallerThan("lg")]: {
           bottom: "20px",
         },
         zIndex: "100",
@@ -55,10 +66,10 @@ function LiveChat() {
           aria-label="bottom arrow"
           radius={"xl"}
           mb={4}
-          onClick={openChat}
+          onClick={handleShowChat}
         >
           <Image
-            src={"/public/chat_icon.svg"}
+            src={"/chat_icon.svg"}
             alt="chat icon"
             style={{
               width: "70%",
@@ -93,7 +104,7 @@ function LiveChat() {
               </Text>
 
               <ActionIcon
-                pos={"fixed"}
+                // pos={"fixed"}
                 // style={{ position: "absolute" }}
                 // size={"xl"}
                 right={"1.3rem"}
@@ -146,10 +157,10 @@ function LiveChat() {
               radius={"0"}
               mx={"9px"}
               bottom={"10px"}
-              onClick={openChat}
+              onClick={handleShowChat}
             >
               <Image
-                src={"/public/chat_icon.svg"}
+                src={"/chat_icon.svg"}
                 alt="chat icon"
                 style={{
                   width: "30px",
@@ -165,64 +176,89 @@ function LiveChat() {
     </Box>
   );
 }
+export const ChatWidgetController = (() => {
+  // Initialize Tawk.to
+  const init = (language) => {
+    window.Tawk_API = window.Tawk_API || {};
+    window.Tawk_API.autoStart = false; // Disable auto-start
 
+    // Load Tawk.to script
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://embed.tawk.to/${
+      import.meta.env.VITE_APP_TAWK_PROPERTY_ID
+    }/${
+      language === "fr"
+        ? import.meta.env.VITE_APP_TAWK_FR_WIDGET_ID
+        : import.meta.env.VITE_APP_TAWK_EN_WIDGET_ID
+    }`;
+    script.charset = "UTF-8";
+    script.setAttribute("crossorigin", "*");
+    document.body.appendChild(script);
 
-const TawkToChat = () => {
-  const { i18n } = useTranslation(); // Access the current language from i18n
+    // window.Tawk_API.onLoad = () => {
+    //   console.log("Tawk.to loaded");
+    // };
 
-  const getChatId = () => {
-    const lang = i18n.language; // Get the language from i18n
+    // // Handle the onChatHidden event to perform cleanup when the chat is closed
+    // window.Tawk_API.onChatHidden = () => {
+    //   console.log("Chat closed. Performing cleanup.");
+    //   // Add any additional cleanup code here, if needed
+    // };
+  };
 
-    // Map the language to the specific Tawk.to widget
-    switch (lang) {
-      case 'fr':
-        return '66e353e1ea492f34bc12aad5/1i9k8v1lq'; // Widget ID for German
-      case 'en':
-        return '66e353e1ea492f34bc12aad5/1i7jvvah9'; // Widget ID for Russian
-      
-      default:
-        return '66e353e1ea492f34bc12aad5/1i7jvvah9'; // Default to English
+  // Show the chat widget
+  const showChat = () => {
+    window.Tawk_API.start({ showWidget: false });
+
+    window.Tawk_API.maximize({ showWidget: true });
+    // window.Tawk_API.hideWidget();
+
+    if (window.Tawk_API) {
+      window.Tawk_API.onChatEnded = function () {
+        hideChat();
+      };
+    }
+    window.Tawk_API.onLoad = function () {
+      window.Tawk_API.hideWidget();
+    };
+  };
+
+  // if (window.Tawk_API) {
+  //   window.Tawk_API.onChatMinimized = function () {
+  //     hideChat();
+  //   };
+  // }
+  // window.Tawk_API.onLoad = function () {
+  //   window.Tawk_API.hideWidget();
+  // };
+
+  // Hide the chat widget
+  const hideChat = () => {
+    window.Tawk_API.shutdown();
+  };
+
+  // Switch between English and French widgets
+  const switchLanguage = (language) => {
+    const widgetId =
+      language === "fr"
+        ? import.meta.env.VITE_APP_TAWK_FR_WIDGET_ID
+        : import.meta.env.VITE_APP_TAWK_EN_WIDGET_ID;
+    if (window.Tawk_API) {
+      window.Tawk_API.switchWidget({
+        propertyId: import.meta.env.VITE_APP_TAWK_PROPERTY_ID,
+        widgetId: widgetId,
+      });
     }
   };
 
-  useEffect(() => {
-    const chatId = getChatId();
-
-    if (!chatId) {
-      return;
-    }
-
-    var Tawk_API = Tawk_API || {};
-    var Tawk_LoadStart = new Date();
-
-    (function () {
-      const s1 = document.createElement("script");
-      const s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-
-      // Load the widget dynamically based on chatId (which includes language)
-      s1.src = `https://embed.tawk.to/${chatId}`;
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-
-    return () => {
-      // Clean up: Remove the widget script if language changes
-      const tawkScript = document.querySelector('script[src*="tawk.to"]');
-      if (tawkScript) {
-        tawkScript.remove();
-        if (window.Tawk_API) {
-          window.Tawk_API = null;
-        }
-      }
-    };
-  }, [i18n.language]); // Reload when language changes
-
-  return null;
-};
-
-
+  // Expose the functions
+  return {
+    init,
+    showChat,
+    hideChat,
+    switchLanguage,
+  };
+})();
 
 export default LiveChat;

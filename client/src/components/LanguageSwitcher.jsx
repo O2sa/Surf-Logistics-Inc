@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import "../i18n"; // Import the i18n configuration
 import { Box, Button, Flex, Group, rem, Select } from "@mantine/core";
 import { forwardRef } from "react";
+import { ChatWidgetController } from "./LiveChat";
 
 const langs = {
   en: "English",
@@ -14,6 +15,7 @@ const LanguageSwitcher = ({ color }) => {
   // Language change handler
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    ChatWidgetController.switchLanguage(lng)
   };
 
   return (
