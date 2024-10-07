@@ -29,7 +29,7 @@ const ConsultationAndQuote = () => {
         <Title c={"quote"} order={5}>
           {t("Free Consultation")}
         </Title>
-        <Text style={{ lineHeight: "1.4" }} mb={"lg"}>
+        <Text color="#264760" style={{ lineHeight: "1.4" }} mb={"lg"}>
           {`${t(
             "Unlock your logistics potential! Our savvy consultants dive deep into your operations. Whether it is express, parcel, or trucking, we will find growth hacks and boost your game. No pressure, just powerful insights."
           )} `}
@@ -44,7 +44,7 @@ const ConsultationAndQuote = () => {
         <Title c={"quote"} order={5}>
           {t("Free Quote")}
         </Title>
-        <Text style={{ lineHeight: "1.4" }} mb={"lg"}>
+        <Text color="#264760" style={{ lineHeight: "1.4" }} mb={"lg"}>
           {t(
             "Need a freight solution that is efficient and budget friendly? Get a quick, hassle-free quote and discover how we can simplify your shipping and keep you ahead of the game."
           )}

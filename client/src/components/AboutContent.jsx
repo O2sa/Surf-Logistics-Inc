@@ -58,12 +58,12 @@ const AboutContent = () => {
             desColor="services"
             description="Where Freight Meets Finesse"
           />
-          <Text mb={"md"} style={{ fontSize: "18px" }}>
+          <Text color="#264760" mb={"md"} style={{ fontSize: "18px" }}>
             {t(
               "We’re your go-to for B2B transport across North America, offering everything from cargo vans to tractor trailers."
             )}
           </Text>
-          <Text style={{ fontSize: "18px" }}>
+          <Text color="#264760" style={{ fontSize: "18px" }}>
             {t(
               "At Surf, we are all about speed, flexibility, and reliability. With our diverse fleet and swift equipment sourcing, we are ready for any challenge—without tying you down with contracts. Get your logistics done right, every time."
             )}

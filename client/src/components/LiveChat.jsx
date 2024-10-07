@@ -9,57 +9,29 @@ import {
   Title,
   ActionIcon,
   useMantineTheme,
+  Image,
 } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { IconMessage } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import TawkToChat from "./TawkWidget";
 import { SlArrowDown } from "react-icons/sl";
 
 function LiveChat() {
   const [opened, { toggle, close }] = useDisclosure(true);
   const theme = useMantineTheme();
-  const { t } = useTranslation();
-
-  useEffect(() => {
-    var Tawk_API = Tawk_API || {};
-    var Tawk_LoadStart = new Date();
-
-    (function () {
-      const s1 = document.createElement("script");
-      const s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/66e353e1ea492f34bc12aad5/1i7jvvah9";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-
-    // Ensure the widget is hidden after load
-    // const hideWidget = () => {
-    //   if (window.Tawk_API) {
-    //     window.Tawk_API.onLoad = function () {
-    //       console.log("Tawk.to widget hidden on load");
-    //       window.Tawk_API.hideWidget(); // Hide the widget once it has loaded
-    //     };
-    //   }
-    // };
-
-    // hideWidget(); // Call hideWidget to make sure it's hidden after load
-  }, []);
-
-  if (window.Tawk_API) {
-    // console.log("Tawk.to widget hidden on load");
-    window.Tawk_API.hideWidget(); // Hide the widget once it has loaded
-  }
+  const { t, i18n } = useTranslation();
+  TawkToChat();
 
   const openChat = () => {
     if (window.Tawk_API) {
+      window.Tawk_API.setAttributes({
+        language: i18n.language, // Set the widget's language dynamically
+      });
       window.Tawk_API.maximize(); // Opens the Tawk.to chat widget
     }
   };
 
-  const isSmallScreen = useMediaQuery("(max-width: 1000px)");
+  const isSmallScreen = useMediaQuery("(max-width: 1200px)");
 
   return (
     <Box
@@ -85,10 +57,12 @@ function LiveChat() {
           mb={4}
           onClick={openChat}
         >
-          <IconMessage
+          <Image
+            src={"/public/chat_icon.svg"}
+            alt="chat icon"
             style={{
-              width: "80%",
-              height: "80%",
+              width: "70%",
+              // height: "80%",
               color: theme.colors.quote[5],
             }}
             stroke={1.5}
@@ -105,13 +79,12 @@ function LiveChat() {
           h={"333px"}
         >
           <Box w={"250px"} h={"333px"}>
-            <Box bg={"services"} pos={"relative"} display={'flex'} >
+            <Box bg={"services"} pos={"relative"} display={"flex"}>
               <Text
                 w={"100%"}
                 ta={"center"}
                 c={"white"}
                 py={"md"}
-
                 fw={"600"}
                 fz={"18px"}
                 h={"50px"}
@@ -124,7 +97,7 @@ function LiveChat() {
                 // style={{ position: "absolute" }}
                 // size={"xl"}
                 right={"1.3rem"}
-                mt={'12px'}
+                mt={"12px"}
                 color="#fff"
                 onClick={close}
                 variant="transparent"
@@ -140,50 +113,116 @@ function LiveChat() {
                     // color: theme.colors[color]
                     //   ? theme.colors[color][5]
                     //   : color,
-                    color:'white'
+                    color: "white",
                   }}
                   stroke={1.5}
                 />
               </ActionIcon>
             </Box>
 
-            <Box px={"sm"}>
+            <Box px={"sm"} h={"171px"}>
               <Text fw={"600"} fz={"16px"} c="services" my={"sm"} maw={"170px"}>
                 {t("Have Questions? Chat with us live")}
               </Text>
 
-              <Text color="white" fz={"16px"}>
+              <Text
+                style={{ wordSpacing: "-1px", overflow: "hidden" }}
+                color="white"
+                fz={"16px"}
+              >
                 {t(
                   "Hit the button below to connect with our team in real time and get answers to all your logistics questions. We are ready to assist!"
                 )}
               </Text>
             </Box>
-            <Box mx={4} mt={"md"} h={"50px"}>
-              <ActionIcon
-                // style={{ position: "absolute" }}
-                bg="#fff"
-                size={"xl"}
-                variant="filled"
-                aria-label="bottom arrow"
-                w={"100%"}
-                radius={"0"}
-                mb={4}
-                onClick={openChat}
-              >
-                <IconMessage
-                  style={{
-                    width: "80%",
-                    height: "80%",
-                    color: theme.colors.quote[5],
-                  }}
-                  stroke={1.5}
-                />
-              </ActionIcon>
-            </Box>
+            <ActionIcon
+              style={{ position: "absolute" }}
+              bg="#fff"
+              // size={"xl"}
+              variant="filled"
+              aria-label="bottom arrow"
+              w={"232px"}
+              h={"50px"}
+              radius={"0"}
+              mx={"9px"}
+              bottom={"10px"}
+              onClick={openChat}
+            >
+              <Image
+                src={"/public/chat_icon.svg"}
+                alt="chat icon"
+                style={{
+                  width: "30px",
+                  // height: "80%",
+                  color: theme.colors.quote[5],
+                }}
+                stroke={1.5}
+              />
+            </ActionIcon>
           </Box>
         </Box>
       )}
     </Box>
   );
 }
+
+
+const TawkToChat = () => {
+  const { i18n } = useTranslation(); // Access the current language from i18n
+
+  const getChatId = () => {
+    const lang = i18n.language; // Get the language from i18n
+
+    // Map the language to the specific Tawk.to widget
+    switch (lang) {
+      case 'fr':
+        return '66e353e1ea492f34bc12aad5/1i9k8v1lq'; // Widget ID for German
+      case 'en':
+        return '66e353e1ea492f34bc12aad5/1i7jvvah9'; // Widget ID for Russian
+      
+      default:
+        return '66e353e1ea492f34bc12aad5/1i7jvvah9'; // Default to English
+    }
+  };
+
+  useEffect(() => {
+    const chatId = getChatId();
+
+    if (!chatId) {
+      return;
+    }
+
+    var Tawk_API = Tawk_API || {};
+    var Tawk_LoadStart = new Date();
+
+    (function () {
+      const s1 = document.createElement("script");
+      const s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+
+      // Load the widget dynamically based on chatId (which includes language)
+      s1.src = `https://embed.tawk.to/${chatId}`;
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+
+    return () => {
+      // Clean up: Remove the widget script if language changes
+      const tawkScript = document.querySelector('script[src*="tawk.to"]');
+      if (tawkScript) {
+        tawkScript.remove();
+        if (window.Tawk_API) {
+          window.Tawk_API = null;
+        }
+      }
+    };
+  }, [i18n.language]); // Reload when language changes
+
+  return null;
+};
+
+
+
 export default LiveChat;

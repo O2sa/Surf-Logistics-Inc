@@ -33,9 +33,10 @@ const Pages = () => {
         sx={(theme) => ({
           // position: "relative",
           ...layoutStyle(theme),
+          position: "relative",
+          width:'100%'
+
         })}
-        px={"md"}
-        pt={"md"}
       >
         <Box
           // w={"100%"}
@@ -45,13 +46,28 @@ const Pages = () => {
           // h={"70vh"}
           sx={(theme) => ({
             ...layoutStyle(theme),
+            padding: "20px 20px 0",
+
+    
+            [theme.fn.largerThan("md")]: {
+              padding: "50px 50px 0",
+            },
           })}
         >
           <Outlet />
         </Box>
         <Box
-          px={"1.8rem"}
-          pt={"lg"}
+          // px={"1.8rem"}
+          // pt={"lg"}
+          sx={(theme) => ({
+            padding: "30px 30px 0",
+
+            [theme.fn.largerThan("md")]: {
+              padding: "80px 80px 0",
+            }
+      
+         
+          })}
           style={{
             position: "absolute",
             zIndex: 2,

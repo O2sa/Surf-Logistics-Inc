@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 function PageHeader({ color, title }) {
   const { t } = useTranslation();
+  
   return (
     <Box
       bg={color}
@@ -10,13 +11,12 @@ function PageHeader({ color, title }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "340px",
-        // [theme.fn.smallerThan("sm")]: {
-        //   height: "40vh",
-        // },
-        // [theme.fn.largerThan("md")]: {
-        //   height: "30vh",
-        // },
+        [theme.fn.smallerThan("md")]: {
+          height: "400px",
+        },
+        [theme.fn.largerThan("sm")]: {
+          height: "560px",
+        },
 
   
       })}

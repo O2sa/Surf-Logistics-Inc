@@ -16,16 +16,18 @@ import {
   IconUserSquare,
 } from "@tabler/icons-react";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthProvider";
 import { useMediaQuery } from "@mantine/hooks";
+
+
 
 const links = [
   { label: "Home", link: "/" },
   { label: "About", link: "/pages/about" },
   { label: "Services", link: "/pages/services" },
-  { label: "Reach Out", link: "#" },
+  { label: "Reach Out", link: "/pages/reach" },
   {
     label: "Consultation",
     link: "pages/consultation-quote/consultation",
@@ -65,23 +67,39 @@ function Links() {
   const nav = useNavigate();
   const { t } = useTranslation();
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
   return (
-    <Menu shadow="md" width={200}>
+    <Menu shadow="md" offset={0} o position="bottom-end" width={200}>
       <Menu.Target>
-          <ActionIcon
-            color="brand"
-            size={isSmallScreen ? "34px" : "49px"}
-            variant="filled"
-            aria-label="Change Page"
-            name="Burgr"
-          >
-            <IconMenu2 style={{ width: "70%", height: "70%" }} stroke={1.5} />
-          </ActionIcon>
+        <ActionIcon
+          color="brand"
+          size={isSmallScreen ? "34px" : "49px"}
+          variant="filled"
+          aria-label="Change Page"
+          name="Burgr"
+        >
+          <IconMenu2 style={{ width: "70%", height: "70%" }} stroke={1.5} />
+        </ActionIcon>
       </Menu.Target>
 
-      <Menu.Dropdown sx={{ position: "absolute" }}>
+      <Menu.Dropdown
+        bg={"transparent"}
+        sx={{ border: "none", }}
+      >
         {links.map((val, idx) => (
-          <Menu.Item onClick={() => nav(val.link)} key={idx}>
+          <Menu.Item
+            h={"38px"}
+            color="white"
+            mb={"1px"}
+            style={{
+              borderRadius: "0",
+              backgroundColor:  "rgba(109, 122, 133, 0.5)",
+              mixBlendMode: "multiply",
+              // opacity: '0.5'
+            }}
+            onClick={() => nav(val.link)}
+            key={idx}
+          >
             {t(val.label)}
           </Menu.Item>
         ))}

@@ -1,6 +1,6 @@
 import { Anchor, Text } from "@mantine/core";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const LinkComp = ({ ext = false, link, label }) => {
   const { t } = useTranslation();
