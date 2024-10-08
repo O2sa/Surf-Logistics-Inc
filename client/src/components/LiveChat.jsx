@@ -137,7 +137,11 @@ function LiveChat() {
               </Text>
 
               <Text
-                style={{ wordSpacing: "-1px", overflow: "hidden" }}
+                style={{
+                  wordSpacing: "-1px",
+                  overflow: "hidden",
+                  lineHeight: language == "fr" && "19px",
+                }}
                 color="white"
                 fz={"16px"}
               >
