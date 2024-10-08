@@ -141,7 +141,7 @@ const QuoteForm = () => {
               required
             />
           </Group>{" "}
-          <Group spacing={2} >
+          <Group spacing={2} noWrap>
             <NumberInput
               placeholder={t("Length (in)")}
               {...form.getInputProps("lenght")}
@@ -152,15 +152,16 @@ const QuoteForm = () => {
               placeholder={t("Width (in)")}
               {...form.getInputProps("width")}
             />
-            <NumberInput
+       
+          </Group>{" "}
+          <Group spacing={2} noWrap >
+          <NumberInput
               placeholder={t("Height (in)")}
               {...form.getInputProps("height")}
               required
             />
-          </Group>{" "}
-          <Group spacing={2} noWrap >
             <NumberInput
-              placeholder={t("Package Weight (kg)")}
+              placeholder={t("Weight (kg)")}
               {...form.getInputProps("weight")}
               required
             />
