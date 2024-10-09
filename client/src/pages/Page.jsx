@@ -46,7 +46,7 @@ function Page({
               // overflow:'scroll'
             }
           }
-          w={"80rem"}
+          w={"90rem"}
           fluid
           // mb={"lg"}
         >

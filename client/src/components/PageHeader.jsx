@@ -15,7 +15,7 @@ function PageHeader({ color, title }) {
           height: "400px",
         },
         [theme.fn.largerThan("sm")]: {
-          height: "560px",
+          height: "500px",
         },
 
   

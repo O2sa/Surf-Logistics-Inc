@@ -19,12 +19,12 @@ const Paragraph = ({
   const { t } = useTranslation();
 
   return (
-    <Box m={'auto'} >
+    <Box  >
       <Title  c={titleColor} order={4} style={{fontSize:"18px"}}>
         {t(title)}
       </Title>
 
-      <Text  maw={'900px'} style={{fontSize:"18px"}} mb={'md'} c={desColor}>{t(description)}</Text>
+      <Text  maw={'1200px'} style={{fontSize:"18px"}} mb={'md'} c={desColor}>{t(description)}</Text>
     </Box>
   );
 };
