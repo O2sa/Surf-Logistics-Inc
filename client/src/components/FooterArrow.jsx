@@ -11,7 +11,7 @@ function FooterArrow({ to = "/", color = "white" }) {
     <Box
       style={{
         position: "absolute",
-        bottom: "40px",
+        bottom: "60px",
         left: "50%",
 
         transform: "translateX(-50%)",
@@ -25,8 +25,8 @@ function FooterArrow({ to = "/", color = "white" }) {
         onClick={() => nav(to)}
         variant="transparent"
         aria-label="bottom arrow"
-        w={'85px'}
-        h={'42px'}
+        w={'100px'}
+        h={'50px'}
       >
         <SlArrowDown
           style={{
