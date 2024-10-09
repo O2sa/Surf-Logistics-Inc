@@ -253,7 +253,7 @@ export const ChatWidgetController = (() => {
         : VITE_APP_TAWK_EN_WIDGET_ID;
     if (window.Tawk_API) {
       window.Tawk_API.switchWidget({
-        propertyId: VITE_APP_TAWK_EN_WIDGET_ID,
+        propertyId: VITE_APP_TAWK_PROPERTY_ID,
         widgetId: widgetId,
       });
     }
