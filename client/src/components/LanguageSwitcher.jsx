@@ -26,7 +26,7 @@ const LanguageSwitcher = ({ color }) => {
       aria-label="Select Language" // Provide an accessible name for screen readers
       onClick={() => changeLanguage(i18n.language == "fr" ? "en" : "fr")}
     >
-      {langs[i18n.language]}
+      {langs[i18n.language == "fr" ? "en" : "fr"]}
     </Button>
   );
 };

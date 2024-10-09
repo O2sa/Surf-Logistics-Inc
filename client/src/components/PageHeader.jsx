@@ -28,6 +28,7 @@ function PageHeader({ color, title }) {
    
           [theme.fn.smallerThan("md")]: {
             fontSize: "28px",
+            margin:'0 16px'
           },
           [theme.fn.largerThan("md")]: {
             fontSize: "40px",

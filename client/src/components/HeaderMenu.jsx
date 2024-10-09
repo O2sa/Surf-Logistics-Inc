@@ -6,6 +6,7 @@ import {
   ActionIcon,
   Group,
   useMantineTheme,
+  Stack,
 } from "@mantine/core";
 import {
   IconSettings,
@@ -21,8 +22,6 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "./AuthProvider";
 import { useMediaQuery } from "@mantine/hooks";
 
-
-
 const links = [
   { label: "Home", link: "/" },
   { label: "About", link: "/pages/about" },
@@ -30,18 +29,18 @@ const links = [
   { label: "Reach Out", link: "/pages/reach" },
   {
     label: "Consultation",
-    link: "pages/consultation-quote/consultation",
+    link: "/pages/consultation-quote/consultation",
   },
-  { label: "Quote", link: "pages/consultation-quote/quote" },
+  { label: "Quote", link: "/pages/consultation-quote/quote" },
 ];
 
 function HeaderMenu() {
   const nav = useNavigate();
   // const { isAuthenticated } = useAuth();
   return (
-    <Group spacing={"xs"}>
+    <Group spacing={"xs"} sx={{alignItems:'start'}}>
       <ActionIcon
-        size={"34px"}
+        size={"46px"}
         color="brand"
         // sx={(theme) => ({
         //   [theme.fn.largerThan("md")]: {
@@ -54,11 +53,14 @@ function HeaderMenu() {
         aria-label="dashboard"
         onClick={() => nav("/dashboard")}
       >
-        <IconUserSquare size={"49px"} color="white" />
+        <IconUserSquare style={{ width: "100%", height: "100%" }} color="white" />
       </ActionIcon>
-      <LanguageSwitcher />
 
-      <Links />
+      <Stack sx={{alignItems:'center'}} spacing={'xs'}>
+        <Links />
+
+        <LanguageSwitcher />
+      </Stack>
     </Group>
   );
 }
@@ -69,11 +71,11 @@ function Links() {
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   return (
-    <Menu  offset={0} o position="bottom-end" width={200}>
+    <Menu offset={0} zIndex={"300"} position="bottom-end" width={200}>
       <Menu.Target>
         <ActionIcon
           color="brand"
-          size={isSmallScreen ? "34px" : "49px"}
+          size={"49px"}
           variant="filled"
           aria-label="Change Page"
           name="Burgr"
@@ -82,10 +84,7 @@ function Links() {
         </ActionIcon>
       </Menu.Target>
 
-      <Menu.Dropdown
-        bg={"transparent"}
-        sx={{ border: "none", }}
-      >
+      <Menu.Dropdown bg={"transparent"} sx={{ border: "none" }}>
         {links.map((val, idx) => (
           <Menu.Item
             h={"38px"}
@@ -93,7 +92,7 @@ function Links() {
             mb={"1px"}
             style={{
               borderRadius: "0",
-              backgroundColor:  "rgba(109, 122, 133, 0.5)",
+              backgroundColor: "rgba(109, 122, 133, 0.5)",
               mixBlendMode: "multiply",
               // opacity: '0.5'
             }}
