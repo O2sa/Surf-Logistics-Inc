@@ -11,12 +11,14 @@ function PageHeader({ color, title }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        [theme.fn.smallerThan("md")]: {
-          height: "400px",
-        },
-        [theme.fn.largerThan("sm")]: {
-          height: "500px",
-        },
+        height: "300px",
+
+        // [theme.fn.smallerThan("md")]: {
+        //   height: "400px",
+        // },
+        // [theme.fn.largerThan("sm")]: {
+        //   height: "500px",
+        // },
 
   
       })}

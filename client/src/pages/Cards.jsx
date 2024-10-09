@@ -5,6 +5,7 @@ import CustomCard from "../components/Card";
 import { useSearchParams } from "react-router-dom";
 import FooterArrow from "../components/FooterArrow";
 import { mainSectionHeight } from "../utils/constants";
+import { useMediaQuery } from "@mantine/hooks";
 
 const cardsData = [
   {
@@ -36,17 +37,26 @@ const cardsData = [
 const Cards = () => {
   const [searchParams] = useSearchParams();
   const page = searchParams.get("page");
+  const isSmallScreen = useMediaQuery("(max-width: 1200px)");
+
   return (
     <Grid
-      style={{ minHeight: `calc(${mainSectionHeight} + 100vh)`, }}
+      // style={{ minHeight: `calc(${mainSectionHeight} + 100vh)`, }}
       // align="stretch"
       m={"0"}
+      h={"100%"}
       gutter={"5px"}
-      pos={'relative'}
+      pos={"relative"}
     >
       {!page ? (
         cardsData.map((val, idx) => (
-          <Grid.Col key={idx} xs={12} md={6}>
+          <Grid.Col
+            pb={"0px"}
+            pt={  "5px"}
+            key={idx}
+            xs={12}
+            md={6}
+          >
             <CustomCard data={val} />
           </Grid.Col>
         ))
@@ -55,7 +65,7 @@ const Cards = () => {
           <Grid.Col xs={12}>
             <CustomCard isPage data={cardsData.find((val) => val.to == page)} />
           </Grid.Col>
-          <FooterArrow to={page} color="white"/>
+          <FooterArrow to={page} color="white" />
         </>
       )}
     </Grid>

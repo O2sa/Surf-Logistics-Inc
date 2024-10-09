@@ -51,7 +51,7 @@ function LiveChat() {
         marginRight: "20px",
 
         [theme.fn.largerThan("md")]: {
-          marginRight: "50px",
+          marginRight: "40px",
         },
 
         [theme.fn.smallerThan("lg")]: {

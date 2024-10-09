@@ -16,11 +16,11 @@ const Pages = () => {
       sx={(theme) => ({
         display: "flex",
         flexDirection: "column",
-        [theme.fn.smallerThan("md")]: {
+        [theme.fn.smallerThan("lg")]: {
           minHeight: `100vh`,
           justifyContent: "space-between",
         },
-        [theme.fn.largerThan("md")]: {
+        [theme.fn.largerThan("lg")]: {
           height: `100vh`,
         },
       })}
@@ -41,16 +41,17 @@ const Pages = () => {
         <Box
           // w={"100%"}
           // py={"md"}
+          className="body_content"
           // pos={"relative"}
           // top={-134}
           // h={"70vh"}
           sx={(theme) => ({
-            ...layoutStyle(theme),
+            height:'100%',
             padding: "20px 20px 0",
 
     
             [theme.fn.largerThan("md")]: {
-              padding: "50px 50px 0",
+              padding: "40px 40px 0",
             },
           })}
         >
@@ -89,7 +90,7 @@ const Pages = () => {
           },
 
           // position: "relative",
-          zIndex: 2,
+          // zIndex: 2,
         })}
       >
         <Footer />
