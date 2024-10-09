@@ -54,7 +54,7 @@ function LiveChat() {
         [theme.fn.smallerThan("lg")]: {
           bottom: "20px",
         },
-        zIndex: "10",
+        zIndex: "1",
       })}
     >
       {isSmallScreen || !opened ? (
