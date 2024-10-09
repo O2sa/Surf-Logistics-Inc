@@ -43,6 +43,7 @@ function Page({
               // alignContent:"center",
               // justifyContent: "space-around",
               // alignItems: "center",
+              overflow:'scroll'
             }
           }
           w={"70rem"}

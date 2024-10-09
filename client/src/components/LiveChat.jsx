@@ -14,6 +14,9 @@ import {
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { SlArrowDown } from "react-icons/sl";
+import { VITE_APP_TAWK_EN_WIDGET_ID, VITE_APP_TAWK_FR_WIDGET_ID, VITE_APP_TAWK_PROPERTY_ID } from "../utils/constants";
+
+
 
 function LiveChat() {
   const [opened, { toggle, close }] = useDisclosure(true);
@@ -190,11 +193,11 @@ export const ChatWidgetController = (() => {
     const script = document.createElement("script");
     script.async = true;
     script.src = `https://embed.tawk.to/${
-      import.meta.env.VITE_APP_TAWK_PROPERTY_ID
+      VITE_APP_TAWK_PROPERTY_ID
     }/${
       language === "fr"
-        ? import.meta.env.VITE_APP_TAWK_FR_WIDGET_ID
-        : import.meta.env.VITE_APP_TAWK_EN_WIDGET_ID
+        ? VITE_APP_TAWK_FR_WIDGET_ID
+        : VITE_APP_TAWK_EN_WIDGET_ID
     }`;
     script.charset = "UTF-8";
     script.setAttribute("crossorigin", "*");
@@ -246,11 +249,11 @@ export const ChatWidgetController = (() => {
   const switchLanguage = (language) => {
     const widgetId =
       language === "fr"
-        ? import.meta.env.VITE_APP_TAWK_FR_WIDGET_ID
-        : import.meta.env.VITE_APP_TAWK_EN_WIDGET_ID;
+        ? VITE_APP_TAWK_FR_WIDGET_ID
+        : VITE_APP_TAWK_EN_WIDGET_ID;
     if (window.Tawk_API) {
       window.Tawk_API.switchWidget({
-        propertyId: import.meta.env.VITE_APP_TAWK_PROPERTY_ID,
+        propertyId: VITE_APP_TAWK_EN_WIDGET_ID,
         widgetId: widgetId,
       });
     }
