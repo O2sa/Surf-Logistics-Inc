@@ -30,7 +30,7 @@ import { useAuth } from "../components/AuthProvider";
 
 export default function Register() {
   const { t } = useTranslation();
-  const location=useLocation()
+  const location = useLocation();
   const from = location.state?.from?.pathname || "/dashboard";
 
   const navigate = useNavigate();
@@ -41,42 +41,46 @@ export default function Register() {
       email: "",
       company: "",
       password: "",
-      phone: null,
+      phone: "",
     },
 
     validate: {
-      firstName:hasLength({ min: 2}, t("Name must have at least 2 letters")),
-      lastName:hasLength({ min: 2}, t("Name must have at least 2 letters")),
- 
-      email: isEmail(t('Enter your email')),
+      firstName: hasLength({ min: 2 }, t("Name must have at least 2 letters")),
+      lastName: hasLength({ min: 2 }, t("Name must have at least 2 letters")),
+
+      email: isEmail(t("Enter your email")),
       phone: (number) => {
-        try {
+        // try {
           // Parse the phone number
-          const phoneNumber = parsePhoneNumberFromString(number);
-          if (phoneNumber) {
-            if (phoneNumber.isValid()) {
-              return null;
-            } else {
-              return t("Invalid phone number format.");
-            }
+
+         
+          // const phoneNumber = parsePhoneNumberFromString(number);
+          // console.log(phoneNumber)
+          if (number) {
+            return null;
           } else {
-            return t("Invalid phone number format.");
+            getNotfication(false, t("Invalid phone number format."));
           }
-        } catch (error) {
-          return t("Invalid phone number format.");
-        }
+        // }
+        //  catch (error) {
+        //   return t("Invalid phone number format.");
+        // }
       },
 
-      password: hasLength({ min: 10 }),
+      password: hasLength(
+        { min: 8 },
+        t("Password must have at least 8 letters")
+      ),
     },
   });
+
+  console.log(form.errors);
 
   const handleSubmit = async (values) => {
     try {
       await customFetch.post("/auth/register", values);
-      getNotfication(true, t("Account creation completed successfully!"))
+      getNotfication(true, t("Account creation completed successfully!"));
       navigate(from, { replace: true });
-
     } catch (error) {
       getNotfication(false, error?.response?.data?.msg);
     }
@@ -84,12 +88,12 @@ export default function Register() {
 
   return (
     <Container size={420} my={40}>
-     <Group position="center">
-        <Box  w={100}>
-          <Logo type={'footer'}/>
+      <Group position="center">
+        <Box w={100}>
+          <Logo type={"footer"} />
         </Box>{" "}
       </Group>
-      <Title order={3}  ta="center" mt={5}>
+      <Title order={3} ta="center" mt={5}>
         {t("Create your account!")}
       </Title>
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
@@ -109,9 +113,7 @@ export default function Register() {
             required
             mb={"md"}
           />
-          <Text>
-          {t("Phone number")}
-          </Text>
+          <Text>{t("Phone number")}</Text>
           <PhoneInput
             country={"us"} // Set default country
             enableSearch={true} // Enable country code search
