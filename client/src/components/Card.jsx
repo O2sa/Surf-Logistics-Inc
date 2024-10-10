@@ -48,7 +48,7 @@ const CustomCard = ({ data, isPage = false }) => {
       justifyContent: "center",
       backgroundColor: theme.colors[data?.color][5],
 
-      [theme.fn.smallerThan("md")]: {
+      [theme.fn.smallerThan("lg")]: {
         height: isPage ? "calc(100vh)" : "20rem",
       },
       overflow: "hidden",
