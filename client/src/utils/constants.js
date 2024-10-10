@@ -1,11 +1,11 @@
 export const mainSectionHeight = "-250px";
 export const layoutStyle = (theme) => ({
-  [theme.fn.smallerThan("md")]: {
+  [theme.fn.smallerThan("lg")]: {
     // height: `100vh)`,
 
     minHeight: `calc(${mainSectionHeight} + 100vh)`,
   },
-  [theme.fn.largerThan("md")]: {
+  [theme.fn.largerThan("lg")]: {
     height: `calc(${mainSectionHeight} + 100vh)`,
   },
 });

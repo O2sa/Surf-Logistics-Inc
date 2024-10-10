@@ -10,8 +10,7 @@ function Page({
   children,
   contentColor = "white",
 }) {
-
-  const {t}=useTranslation()
+  const { t } = useTranslation();
   return (
     <Box
       style={{
@@ -26,51 +25,49 @@ function Page({
       sx={(theme) => ({
         // position: "relative",
         // ...layoutStyle(theme),
-        height:'100%'
+        height: "100%",
       })}
     >
       {/* <PageHeader color={color} title={title} /> */}
       <Box
-      bg={color}
-      sx={(theme) => ({
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "300px",
-
-        // [theme.fn.smallerThan("md")]: {
-        //   height: "400px",
-        // },
-        // [theme.fn.largerThan("sm")]: {
-        //   height: "500px",
-        // },
-
-  
-      })}
-    >
-      <Title
-        ta={"center"}
-        c={"white"}
+        bg={color}
         sx={(theme) => ({
-   
-          [theme.fn.smallerThan("md")]: {
-            fontSize: "28px",
-            margin:'0 16px'
-          },
-          [theme.fn.largerThan("md")]: {
-            fontSize: "40px",
-          },
-        })}        style={{ borderBottom: "4px solid white" }}
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "300px",
+
+          // [theme.fn.smallerThan("md")]: {
+          //   height: "400px",
+          // },
+        })}
       >
-        {t(title)}
-      </Title>
-    </Box>
+        <Title
+          ta={"center"}
+          c={"white"}
+          sx={(theme) => ({
+            [theme.fn.smallerThan("md")]: {
+              fontSize: "28px",
+              margin: "0 16px",
+            },
+            [theme.fn.largerThan("md")]: {
+              fontSize: "40px",
+            },
+          })}
+          style={{ borderBottom: "4px solid white" }}
+        >
+          {t(title)}
+        </Title>
+      </Box>
       <Box
         bg={contentColor}
         sx={(theme) => ({
           display: "flex",
           alignItems: "center",
-          height: `calc(-300px + 100%)`
+          [theme.fn.largerThan("md")]: {
+            height: `calc(-300px + 100%)`,
+          },
+
         })}
         // h={"30vh"}
         my={"xl"}
@@ -85,15 +82,13 @@ function Page({
               // overflow:'scroll'
             }
           }
-          w={"80rem"}
+          w={"70rem"}
           fluid
           // mb={"lg"}
         >
           {children}
         </Container>
       </Box>
-
-
     </Box>
   );
 }
