@@ -24,14 +24,14 @@ import { useMediaQuery } from "@mantine/hooks";
 
 const links = [
   { label: "Home", link: "/" },
-  { label: "About", link: "/pages/about" },
-  { label: "Services", link: "/pages/services" },
-  { label: "Reach Out", link: "/pages/reach" },
+  { label: "About", link: "/pages/?page=about" },
+  { label: "Services", link: "/pages/?page=services" },
+  { label: "Reach Out", link: "/pages/?page=reach" },
   {
     label: "Consultation",
-    link: "/pages/consultation-quote/consultation",
+    link: "/pages/?page=consultation-quote",
   },
-  { label: "Quote", link: "/pages/consultation-quote/quote" },
+  { label: "Quote", link: "/pages/?page=consultation-quote" },
 ];
 
 function HeaderMenu() {
