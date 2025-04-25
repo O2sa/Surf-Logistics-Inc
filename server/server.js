@@ -47,8 +47,14 @@ if (process.env.NODE_ENV === "development") {
 const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
-      `http://${process.env.CLIENT_ORIGIN}`,
-      `https://${process.env.CLIENT_ORIGIN}`,
+      // `http://${process.env.CLIENT_ORIGIN}`,
+      // `https://${process.env.CLIENT_ORIGIN}`,
+      `http://localhost:5173`,
+      `http://localhost:3000`,
+      `http://client:3000`,
+      `http://localhost:80`,
+      `http://client:80`,
+
     ];
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
@@ -59,7 +65,7 @@ const corsOptions = {
   credentials: true,
 };
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 // CSP configuration with helmet
 
 // app.use(
