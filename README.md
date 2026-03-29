@@ -17,7 +17,6 @@ A comprehensive web solution for a shipping and logistics company. This project 
 **🛠 Admin Dashboard**
 
 * **Request Management:** Centralized hub for admins to view and manage consulting and meeting requests submitted by clients.
-* **Data Visualization:** (Optional: Mention if you have charts) Visual overview of incoming requests.
 * **Secure Authentication:** Protected routes for administrative access.
 
 ### 🛠️ Tech Stack
